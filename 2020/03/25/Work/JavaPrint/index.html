@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-03-25T14:43:00.000Z">
-<meta property="article:modified_time" content="2020-03-25T16:15:23.867Z">
+<meta property="article:modified_time" content="2020-03-25T16:19:46.530Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -155,7 +155,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 812 个字)
+                    5 分钟 读完 (大约 822 个字)
                 </span>
                 
                 
@@ -179,14 +179,142 @@ var _hmt = _hmt || [];
 <li>3构建java打印xml文件</li>
 <li>4解析xml配置文件</li>
 <li>5java打印<a id="more"></a>
-由于需要，现在要实现一个java打印的程序。我们开始第一步构建springboot项目。    <h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a><strong>第一步</strong></h4>打开idea，new 一个Project，选择Spring initializr 初始化一个springboot项目。在pom文件中按下alt + insert 选择Dependency使用idea的引入maven依赖。如下：   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">        &lt;!--基础依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;!--httpClient连接--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.httpcomponents&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;httpclient&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;!--gogle的Zxing生成二维码--&gt;</span><br><span class="line">        &lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;com.google.zxing&#x2F;core --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;core&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.3.3&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;com.google.zxing&#x2F;javase --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;javase&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.3.3&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;!--判断非空等的工具依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;me.javy&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;javy-helper&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;0.0.1-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.junit.vintage&lt;&#x2F;groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;junit-vintage-engine&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;&#x2F;exclusion&gt;</span><br><span class="line">            &lt;&#x2F;exclusions&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;!--使用pojo解析xml文件所用--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.16.20&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">![avator](http:&#x2F;&#x2F;img.yangjiapo.cn&#x2F;jp1.png)</span><br><span class="line">#### **配置httpClient**</span><br><span class="line">1.httpClient连接可以远程访问服务器，获取数据，有时需要。所以这里也配一下。下面我们进行httpClient配置。在config包下建一个httpClient和httpCLientService，一个是构建对象一个是连接服务。    </span><br><span class="line">在properties中写入httpclient的基础配置：  </span><br><span class="line">&#96;&#96;&#96;angular2html</span><br><span class="line">#http配置服务</span><br><span class="line">#最大连接数</span><br><span class="line">http.maxTotal &#x3D; 100</span><br><span class="line">#并发数</span><br><span class="line">http.defaultMaxPerRoute &#x3D; 20</span><br><span class="line">#创建连接的最长时间</span><br><span class="line">http.connectTimeout&#x3D;1000</span><br><span class="line">#从连接池中获取到连接的最长时间</span><br><span class="line">http.connectionRequestTimeout&#x3D;500</span><br><span class="line">#数据传输的最长时间</span><br><span class="line">http.socketTimeout&#x3D;10000</span><br><span class="line">#提交请求前测试连接是否可用</span><br><span class="line">http.staleConnectionCheckEnabled&#x3D;true</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">2.在httpClient往容器中注入Bean属性，采用注解@Value来实现如下：    </span><br><span class="line">&#96;&#96;&#96;angular2html</span><br><span class="line">@Configuration</span><br><span class="line">public class HttpClient &#123;</span><br><span class="line">	</span><br><span class="line">    @Value(&quot;$&#123;http.maxTotal:1&#125;&quot;)</span><br><span class="line">    private Integer maxTotal;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;http.defaultMaxPerRoute:1&#125;&quot;)</span><br><span class="line">    private Integer defaultMaxPerRoute;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;http.connectTimeout:1&#125;&quot;)</span><br><span class="line">    private Integer connectTimeout;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;http.connectionRequestTimeout:1&#125;&quot;)</span><br><span class="line">    private Integer connectionRequestTimeout;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;http.socketTimeout:1&#125;&quot;)</span><br><span class="line">    private Integer socketTimeout;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;http.staleConnectionCheckEnabled:true&#125;&quot;)</span><br><span class="line">    private boolean staleConnectionCheckEnabled;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">- 1.下面我们首先实列化一个连接池管理器，设置最大连接数，并发连接数。</span><br><span class="line">&#96;&#96;&#96;angular2html</span><br><span class="line">     @Bean(name &#x3D; &quot;httpClientConnectionManager&quot;)</span><br><span class="line">    public PoolingHttpClientConnectionManager getHttpClientConnectionManager()&#123;</span><br><span class="line">        PoolingHttpClientConnectionManager httpClientConnectionManager &#x3D; new PoolingHttpClientConnectionManager();</span><br><span class="line">        &#x2F;&#x2F;最大连接数</span><br><span class="line">        httpClientConnectionManager.setMaxTotal(maxTotal);</span><br><span class="line">        &#x2F;&#x2F;并发数</span><br><span class="line">        httpClientConnectionManager.setDefaultMaxPerRoute(defaultMaxPerRoute);</span><br><span class="line">        return httpClientConnectionManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">- 2.实列化连接池，设置连接池管理器。我们需要用到spring的@Qualifier，其意为合格者，用于区分注解实例，参数名为我们的连接池管理器注解名称。      </span><br><span class="line">&#96;&#96;&#96;angular2html</span><br><span class="line"> @Bean(name &#x3D; &quot;httpClientBuilder&quot;)</span><br><span class="line">    public HttpClientBuilder getHttpClientBuilder(@Qualifier(&quot;httpClientConnectionManager&quot;)PoolingHttpClientConnectionManager httpClientConnectionManager)&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;HttpClientBuilder中的构造方法被protected修饰，所以这里不能直接使用new来实例化一个HttpClientBuilder，可以使用HttpClientBuilder提供的静态方法create()来获取HttpClientBuilder对象</span><br><span class="line">        HttpClientBuilder httpClientBuilder &#x3D; HttpClientBuilder.create();</span><br><span class="line"></span><br><span class="line">        httpClientBuilder.setConnectionManager(httpClientConnectionManager);</span><br><span class="line"></span><br><span class="line">        return httpClientBuilder;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<img src="http://img.yangjiapo.cn/jp2.png" alt="avator"></li>
-<li>3.注入连接池，获取client对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    @Bean</span><br><span class="line">    public CloseableHttpClient getCloseableHttpClient(@Qualifier(&quot;httpClientBuilder&quot;) HttpClientBuilder httpClientBuilder)&#123;</span><br><span class="line">        return httpClientBuilder.build();</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">- 4.Builder是requestConfig中的一个内部类，通过requestConfig的custom方法获取builder的对象，设置builder的连接信息。   </span><br><span class="line">&#96;&#96;&#96;angular2html</span><br><span class="line">    @Bean(name &#x3D; &quot;builder&quot;)</span><br><span class="line">    public RequestConfig.Builder getBuilder()&#123;</span><br><span class="line">        RequestConfig.Builder builder &#x3D; RequestConfig.custom();</span><br><span class="line">        return builder.setConnectTimeout(connectTimeout)&#x2F;&#x2F;创建连接的最长时间</span><br><span class="line">                .setConnectionRequestTimeout(connectionRequestTimeout)&#x2F;&#x2F;从连接池中获取的连接最长时间</span><br><span class="line">                .setSocketTimeout(socketTimeout)&#x2F;&#x2F;数据传输的最长时间</span><br><span class="line">                .setStaleConnectionCheckEnabled(staleConnectionCheckEnabled);&#x2F;&#x2F;提交请求前测试连接是否可用</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-<li>5.用builder构建一个requestConfig对象<pre><code class="angular2html">@Bean
+由于需要，现在要实现一个java打印的程序。我们开始第一步构建springboot项目。    <h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a><strong>第一步</strong></h4>打开idea，new 一个Project，选择Spring initializr 初始化一个springboot项目。在pom文件中按下alt + insert 选择Dependency使用idea的引入maven依赖。如下：   <pre><code class="angular2html">    &lt;!--基础依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--httpClient连接--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
+        &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!--gogle的Zxing生成二维码--&gt;
+    &lt;!-- https://mvnrepository.com/artifact/com.google.zxing/core --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
+        &lt;artifactId&gt;core&lt;/artifactId&gt;
+        &lt;version&gt;3.3.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/com.google.zxing/javase --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
+        &lt;artifactId&gt;javase&lt;/artifactId&gt;
+        &lt;version&gt;3.3.3&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;!--判断非空等的工具依赖--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;me.javy&lt;/groupId&gt;
+        &lt;artifactId&gt;javy-helper&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;
+                &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;
+    &lt;!--使用pojo解析xml文件所用--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+        &lt;version&gt;1.16.20&lt;/version&gt;
+    &lt;/dependency&gt;</code></pre>
+下面是我的类结构图：<br><img src="http://img.yangjiapo.cn/jp1.png" alt="avator"><h4 id="配置httpClient"><a href="#配置httpClient" class="headerlink" title="配置httpClient"></a><strong>配置httpClient</strong></h4></li>
+</ul>
+<p>1.httpClient连接可以远程访问服务器，获取数据，有时需要。所以这里也配一下。下面我们进行httpClient配置。在config包下建一个httpClient和httpCLientService，一个是构建对象一个是连接服务。<br>在properties中写入httpclient的基础配置：  </p>
+<pre><code class="angular2html">#http配置服务
+#最大连接数
+http.maxTotal = 100
+#并发数
+http.defaultMaxPerRoute = 20
+#创建连接的最长时间
+http.connectTimeout=1000
+#从连接池中获取到连接的最长时间
+http.connectionRequestTimeout=500
+#数据传输的最长时间
+http.socketTimeout=10000
+#提交请求前测试连接是否可用
+http.staleConnectionCheckEnabled=true</code></pre>
+<p>2.在httpClient往容器中注入Bean属性，采用注解@Value来实现如下：    </p>
+<pre><code class="angular2html">@Configuration
+public class HttpClient {
+
+    @Value(&quot;${http.maxTotal:1}&quot;)
+    private Integer maxTotal;
+
+    @Value(&quot;${http.defaultMaxPerRoute:1}&quot;)
+    private Integer defaultMaxPerRoute;
+
+    @Value(&quot;${http.connectTimeout:1}&quot;)
+    private Integer connectTimeout;
+
+    @Value(&quot;${http.connectionRequestTimeout:1}&quot;)
+    private Integer connectionRequestTimeout;
+
+    @Value(&quot;${http.socketTimeout:1}&quot;)
+    private Integer socketTimeout;
+
+    @Value(&quot;${http.staleConnectionCheckEnabled:true}&quot;)
+    private boolean staleConnectionCheckEnabled;
+}</code></pre>
+<ul>
+<li><p>1.下面我们首先实列化一个连接池管理器，设置最大连接数，并发连接数。</p>
+<pre><code class="angular2html"> @Bean(name = &quot;httpClientConnectionManager&quot;)
+public PoolingHttpClientConnectionManager getHttpClientConnectionManager(){
+    PoolingHttpClientConnectionManager httpClientConnectionManager = new PoolingHttpClientConnectionManager();
+    //最大连接数
+    httpClientConnectionManager.setMaxTotal(maxTotal);
+    //并发数
+    httpClientConnectionManager.setDefaultMaxPerRoute(defaultMaxPerRoute);
+    return httpClientConnectionManager;
+}</code></pre>
+</li>
+<li><p>2.实列化连接池，设置连接池管理器。我们需要用到spring的@Qualifier，其意为合格者，用于区分注解实例，参数名为我们的连接池管理器注解名称。      </p>
+<pre><code class="angular2html">@Bean(name = &quot;httpClientBuilder&quot;)
+  public HttpClientBuilder getHttpClientBuilder(@Qualifier(&quot;httpClientConnectionManager&quot;)PoolingHttpClientConnectionManager httpClientConnectionManager){
+
+      //HttpClientBuilder中的构造方法被protected修饰，所以这里不能直接使用new来实例化一个HttpClientBuilder，可以使用HttpClientBuilder提供的静态方法create()来获取HttpClientBuilder对象
+      HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+
+      httpClientBuilder.setConnectionManager(httpClientConnectionManager);
+
+      return httpClientBuilder;
+  }</code></pre>
+<p><img src="http://img.yangjiapo.cn/jp2.png" alt="avator"></p>
+</li>
+<li><p>3.注入连接池，获取client对象</p>
+<pre><code class="angular2html">@Bean
+public CloseableHttpClient getCloseableHttpClient(@Qualifier(&quot;httpClientBuilder&quot;) HttpClientBuilder httpClientBuilder){
+    return httpClientBuilder.build();
+}</code></pre>
+</li>
+<li><p>4.Builder是requestConfig中的一个内部类，通过requestConfig的custom方法获取builder的对象，设置builder的连接信息。   </p>
+<pre><code class="angular2html">@Bean(name = &quot;builder&quot;)
+public RequestConfig.Builder getBuilder(){
+    RequestConfig.Builder builder = RequestConfig.custom();
+    return builder.setConnectTimeout(connectTimeout)//创建连接的最长时间
+            .setConnectionRequestTimeout(connectionRequestTimeout)//从连接池中获取的连接最长时间
+            .setSocketTimeout(socketTimeout)//数据传输的最长时间
+            .setStaleConnectionCheckEnabled(staleConnectionCheckEnabled);//提交请求前测试连接是否可用
+}</code></pre>
+</li>
+<li><p>5.用builder构建一个requestConfig对象</p>
+<pre><code class="angular2html">@Bean
   public RequestConfig getRequestConfig(@Qualifier(&quot;builder&quot;) RequestConfig.Builder builder){
       return builder.build();
   }</code></pre>
-到此httpclient基础信息初始化配置完成。</li>
+<p>到此httpclient基础信息初始化配置完成。</p>
+</li>
 </ul>
 
         </div>
