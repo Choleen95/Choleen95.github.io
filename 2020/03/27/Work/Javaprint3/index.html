@@ -7,17 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>归档 - 山沉</title>
+<title>SpringBoot的java打印票据-3 - 山沉</title>
 
 
-    <meta name="description" content="learn to something">
-<meta property="og:type" content="website">
-<meta property="og:title" content="山沉">
-<meta property="og:url" content="http://choleen95.github.io/archives/index.html">
+    <meta name="description" content="配置打印xml文件并解析打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot的java打印票据-3">
+<meta property="og:url" content="http://choleen95.github.io/2020/03/27/Work/Javaprint3/index.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="learn to something">
+<meta property="og:description" content="配置打印xml文件并解析打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-03-27T15:38:53.072Z">
+<meta property="article:modified_time" content="2020-03-27T16:38:31.116Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -87,7 +89,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/gen.svg" alt="山沉" height="28">
+                <img src="/images/gen.svg" alt="SpringBoot的java打印票据-3" height="28">
             
             </a>
         </div>
@@ -98,7 +100,7 @@ var _hmt = _hmt || [];
                 <a class="navbar-item"
                 href="/">山沉</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/archives">归档</a>
                 
                 <a class="navbar-item"
@@ -137,205 +139,345 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2020
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-27T15:38:53.072Z">2020-03-27</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-27T15:38:53.072Z">2020-03-27</time>
-                        <a href="/2020/03/27/Work/Javaprint3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringBoot的java打印票据-3</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-26T13:11:00.000Z">2020-03-26</time>
-                        <a href="/2020/03/26/Work/JavaPrint2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">springboot的java打印票据-2</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-25T14:43:00.000Z">2020-03-25</time>
-                        <a href="/2020/03/25/Work/JavaPrint/" class="title has-link-black-ter is-size-6 has-text-weight-normal">springboot的java打印票据</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 853 个字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-16T16:00:00.000Z">2020-03-17</time>
-                        <a href="/2020/03/17/Python/Python%E5%AF%BC%E5%87%BAsqlServer%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python导出SqlServer数据字典</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-16T12:35:54.000Z">2020-03-16</time>
-                        <a href="/2020/03/16/Life/2020%E5%B9%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%85%AC%E5%8F%B8%E4%B8%8A%E7%8F%AD/" class="title has-link-black-ter is-size-6 has-text-weight-normal">今天复工，维护好累</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Life/">Life</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-12T16:00:00.000Z">2020-03-13</time>
-                        <a href="/2020/03/13/313-ie/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ie浏览器的加载js不了的问题</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/WEB/">WEB</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-07T09:01:00.000Z">2020-03-07</time>
-                        <a href="/2020/03/07/ExportTable/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Postgresql导出数据字典</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-07T05:10:54.000Z">2020-03-07</time>
-                        <a href="/2020/03/07/hexo%E6%90%AD%E5%BB%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo+icarus搭建的第一个博客</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/%E4%BA%BA%E7%94%9F/">人生</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-07T05:10:54.000Z">2020-03-07</time>
-                        <a href="/2020/03/07/nodejs/" class="title has-link-black-ter is-size-6 has-text-weight-normal">nodejs启动服务失败</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/WEB/">WEB</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-03-06T13:32:54.786Z">2020-03-06</time>
-                        <a href="/2020/03/06/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SpringBoot的java打印票据-3
+            
+        </h1>
+        <div class="content">
+            <h3 id="配置打印xml文件并解析"><a href="#配置打印xml文件并解析" class="headerlink" title="配置打印xml文件并解析"></a><strong><em>配置打印xml文件并解析</em></strong></h3><p>打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。        </p>
+<a id="more"></a> 
+<p>1.构建printSettings.xml文件，放置于resources中。</p>
+<pre><code class="javascript">&lt;print&gt;
+    &lt;!-- 打印机设置 --&gt;
+    &lt;choosePrint&gt;<span class="number">3</span>&lt;<span class="regexp">/choosePrint&gt;</span>
+<span class="regexp">    &lt;!-- 打印任务名称 --&gt;</span>
+<span class="regexp">    &lt;printName&gt;PDF&lt;/</span>printName&gt;
+    &lt;!-- 打印机选择,为空时选择默认打印机 --&gt;
+    &lt;defPrintName&gt;&lt;<span class="regexp">/defPrintName&gt;</span>
+<span class="regexp">    &lt;!-- true:配置生效,false:配置不生效 --&gt;</span>
+<span class="regexp">    &lt;isPrint&gt;true&lt;/i</span>sPrint&gt;
+    &lt;!-- 二维码尺寸<span class="number">90</span>*<span class="number">90</span> --&gt;
+    &lt;qrcodeSize&gt;<span class="number">70</span>&lt;<span class="regexp">/qrcodeSize&gt;</span>
+<span class="regexp">    &lt;!--存放二维码的基本地址--&gt;</span>
+<span class="regexp">    &lt;basePath&gt;G:\JavaPrintQRCode\&lt;/</span>basePath&gt;
+    &lt;!-- 纸张设置 --&gt;
+    &lt;paper&gt;
+        &lt;!-- 打印纸张设置paperWidth,paperHeight --&gt;
+        &lt;paperWidth&gt;<span class="number">595</span>&lt;<span class="regexp">/paperWidth&gt;</span>
+<span class="regexp">        &lt;paperHeight&gt;842&lt;/</span>paperHeight&gt;
+        &lt;!-- 打印区域设置x,y,width,height --&gt;
+        &lt;x&gt;<span class="number">10</span>&lt;<span class="regexp">/x&gt;</span>
+<span class="regexp">        &lt;y&gt;15&lt;/y</span>&gt;
+        &lt;width&gt;<span class="number">580</span>&lt;<span class="regexp">/width&gt;</span>
+<span class="regexp">        &lt;height&gt;840&lt;/</span>height&gt;
+    &lt;<span class="regexp">/paper&gt;</span>
+<span class="regexp">    &lt;!--条形码参数--&gt;</span>
+<span class="regexp">    &lt;tmParameters&gt;</span>
+<span class="regexp">        &lt;paperWidth&gt;200&lt;/</span>paperWidth&gt;
+        &lt;paperHeight&gt;<span class="number">150</span>&lt;<span class="regexp">/paperHeight&gt;</span>
+<span class="regexp">        &lt;useWidth&gt;180&lt;/u</span>seWidth&gt;
+        &lt;useHeight&gt;<span class="number">100</span>&lt;<span class="regexp">/useHeight&gt;</span>
+<span class="regexp">        &lt;useX&gt;5&lt;/u</span>seX&gt;
+        &lt;useY&gt;<span class="number">10</span>&lt;<span class="regexp">/useY&gt;</span>
+<span class="regexp">        &lt;x&gt;20&lt;/</span>x&gt;
+        &lt;y&gt;<span class="number">40</span>&lt;<span class="regexp">/y&gt;</span>
+<span class="regexp">        &lt;width&gt;170&lt;/</span>width&gt;
+        &lt;height&gt;<span class="number">50</span>&lt;<span class="regexp">/height&gt;</span>
+<span class="regexp">        &lt;path&gt;D:\JavaPrintTmCode\&lt;/</span>path&gt;
+        &lt;titleFontName&gt;宋体&lt;<span class="regexp">/titleFontName&gt;</span>
+<span class="regexp">        &lt;titleSize&gt;10&lt;/</span>titleSize&gt;
+        &lt;addressSize&gt;<span class="number">20</span>&lt;<span class="regexp">/addressSize&gt;</span>
+<span class="regexp">        &lt;numberSize&gt;10&lt;/</span>numberSize&gt;
+        &lt;companyName&gt;玖陆物流&lt;<span class="regexp">/companyName&gt;</span>
+<span class="regexp">        &lt;tmPrintName&gt;Xprinter XP-365B&lt;/</span>tmPrintName&gt;
+        &lt;!--<span class="xml"><span class="tag">&lt;<span class="name">tmPrintName</span>&gt;</span>360<span class="tag">&lt;/<span class="name">tmPrintName</span>&gt;</span></span>--&gt;
+    &lt;<span class="regexp">/tmParameters&gt;</span>
+<span class="regexp">    &lt;!-- 打印数据参数设置 --&gt;</span>
+<span class="regexp">    &lt;dataset&gt;</span>
+<span class="regexp">        &lt;data x="5" y="30" name="startAddress" cellWidth="" cellHeight="" font="宋体" size="16"/</span>&gt;
+        &lt;datas name=<span class="string">"appGoodsOrder"</span> type=<span class="string">""</span>&gt;
+            &lt;data x=<span class="string">"110"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsName"</span> /&gt;
+            &lt;data x=<span class="string">"205"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsPkgs"</span> /&gt;
+            &lt;data x=<span class="string">"295"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsPackage"</span> /&gt;
+        &lt;<span class="regexp">/datas&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">        &lt;!--费用格式--&gt;</span>
+<span class="regexp">        &lt;datas name="appFeeOrder" type=""&gt;</span>
+<span class="regexp">            &lt;data x="70" y="230" name="feeText" /</span>&gt;
+        &lt;<span class="regexp">/datas&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">        &lt;table x="" y="" width="" height=""&gt;</span>
+<span class="regexp">            &lt;tr width="" height=""&gt;</span>
+<span class="regexp">                &lt;td width="" height="" colspan="" rowspan="" &gt;&lt;/</span>td&gt;
+                &lt;td width=<span class="string">""</span> height=<span class="string">""</span>&gt;&lt;<span class="regexp">/td&gt;</span>
+<span class="regexp">            &lt;/</span>tr&gt;
+        &lt;<span class="regexp">/table&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">    &lt;/</span>dataset&gt;
+&lt;<span class="regexp">/print&gt;</span></code></pre>
+<p>设置好之后，到pom文件中按下alt + insert 引入maven依赖       </p>
+<pre><code class="javascript">&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;<span class="regexp">/groupId&gt;</span>
+<span class="regexp">    &lt;artifactId&gt;lombok&lt;/</span>artifactId&gt;
+    &lt;version&gt;<span class="number">1.16</span><span class="number">.20</span>&lt;<span class="regexp">/version&gt;</span>
+<span class="regexp">&lt;/</span>dependency&gt;</code></pre>
+<p>让节点构成实体。这样方便我们在打印过程中取值。下面是我的实体结构，从最上层逐步往下。<br><img src="http://img.yangjiapo.cn/JavaPrint3.1.png" alt="avator"><br>其中PrintSettings类是最上层。在加入注解时，可能会有重复的名称，我们需要加入 @XmlTransient注解，这样只在@XmlRootElement注解的实体中找寻有无重复，不管其他类的变量。展示一下最上层和其次顺序的类。       </p>
+<pre><code class="javascript">package com.cargo.order.settings;
+
+<span class="keyword">import</span> lombok.AllArgsConstructor;
+<span class="keyword">import</span> lombok.Data;
+<span class="keyword">import</span> lombok.NoArgsConstructor;
+
+<span class="keyword">import</span> javax.xml.bind.annotation.*;
+
+<span class="comment">/**</span>
+<span class="comment"> *打印设置POJO</span>
+<span class="comment"> * <span class="doctag">@since </span>2020/3/25 8:46</span>
+<span class="comment"> **/</span>
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@XmlRootElement(name = <span class="string">"print"</span>)
+@XmlAccessorType(XmlAccessType.FIELD)
+public <span class="class"><span class="keyword">class</span> <span class="title">PrintSettings</span> </span>{
+    @XmlElement(name = <span class="string">"choosePrint"</span>)
+    private <span class="built_in">String</span> choosePrint;
+    @XmlElement(name = <span class="string">"printName"</span>)
+    private <span class="built_in">String</span> printName;
+    @XmlElement(name = <span class="string">"isPrint"</span>)
+    private <span class="built_in">Boolean</span> isPrint;
+    @XmlElement(name = <span class="string">"qrcodeSize"</span>)
+    private Integer qrcodeSize;
+    @XmlElement(name = <span class="string">"basePath"</span>)
+    private <span class="built_in">String</span> basePath;
+    @XmlElement(name = <span class="string">"paper"</span>)
+    private Paper paper;
+    @XmlElement(name = <span class="string">"dataset"</span>)
+    private DataSet dataSet;
+    @XmlElement(name = <span class="string">"tmParameters"</span>)
+    private TmParameters tmParameters;
+
+    public TmParameters getTmParameters() {
+        <span class="keyword">return</span> tmParameters;
+    }
+
+    public <span class="keyword">void</span> setTmParameters(TmParameters tmParameters) {
+        <span class="keyword">this</span>.tmParameters = tmParameters;
+    }
+
+    public <span class="built_in">String</span> getChoosePrint() {
+        <span class="keyword">return</span> choosePrint;
+    }
+
+    public <span class="keyword">void</span> setChoosePrint(<span class="built_in">String</span> choosePrint) {
+        <span class="keyword">this</span>.choosePrint = choosePrint;
+    }
+
+    public <span class="built_in">String</span> getPrintName() {
+        <span class="keyword">return</span> printName;
+    }
+
+    public <span class="keyword">void</span> setPrintName(<span class="built_in">String</span> printName) {
+        <span class="keyword">this</span>.printName = printName;
+    }
+
+    public <span class="built_in">Boolean</span> getPrint() {
+        <span class="keyword">return</span> isPrint;
+    }
+
+    public <span class="keyword">void</span> setPrint(<span class="built_in">Boolean</span> print) {
+        isPrint = print;
+    }
+
+    public Integer getQrcodeSize() {
+        <span class="keyword">return</span> qrcodeSize;
+    }
+
+    public <span class="keyword">void</span> setQrcodeSize(Integer qrcodeSize) {
+        <span class="keyword">this</span>.qrcodeSize = qrcodeSize;
+    }
+
+    public Paper getPaper() {
+        <span class="keyword">return</span> paper;
+    }
+
+    public <span class="keyword">void</span> setPaper(Paper paper) {
+        <span class="keyword">this</span>.paper = paper;
+    }
+
+    public DataSet getDataSet() {
+        <span class="keyword">return</span> dataSet;
+    }
+
+    public <span class="keyword">void</span> setDataSet(DataSet dataSet) {
+        <span class="keyword">this</span>.dataSet = dataSet;
+    }
+
+    public <span class="built_in">String</span> getBasePath() {
+        <span class="keyword">return</span> basePath;
+    }
+
+    public <span class="keyword">void</span> setBasePath(<span class="built_in">String</span> basePath) {
+        <span class="keyword">this</span>.basePath = basePath;
+    }
+}</code></pre>
+<p>然后展示一下Paper实体.      </p>
+<pre><code class="javascript">package com.cargo.order.settings;
+
+<span class="keyword">import</span> lombok.AllArgsConstructor;
+<span class="keyword">import</span> lombok.Data;
+<span class="keyword">import</span> lombok.NoArgsConstructor;
+
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlAttribute;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlElement;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlRootElement;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlTransient;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@XmlRootElement(name = <span class="string">"paper"</span>)
+public <span class="class"><span class="keyword">class</span> <span class="title">Paper</span> </span>{
+    @XmlElement(name = <span class="string">"paperWidth"</span>)
+    private Integer paperWidth;
+    @XmlElement(name = <span class="string">"paperHeight"</span>)
+    private Integer paperHeight;
+    @XmlElement(name = <span class="string">"x"</span>)
+    private Integer x;
+    @XmlElement(name = <span class="string">"y"</span>)
+    private Integer y;
+    @XmlElement(name = <span class="string">"width"</span>)
+    private Integer width;
+    @XmlElement(name = <span class="string">"height"</span>)
+    private Integer height;
+    @XmlTransient
+    public Integer getPaperWidth() {
+        <span class="keyword">return</span> paperWidth;
+    }
+
+    public <span class="keyword">void</span> setPaperWidth(Integer paperWidth) {
+        <span class="keyword">this</span>.paperWidth = paperWidth;
+    }
+    @XmlTransient
+    public Integer getPaperHeight() {
+        <span class="keyword">return</span> paperHeight;
+    }
+
+    public <span class="keyword">void</span> setPaperHeight(Integer paperHeight) {
+        <span class="keyword">this</span>.paperHeight = paperHeight;
+    }
+    @XmlTransient
+    public Integer getX() {
+        <span class="keyword">return</span> x;
+    }
+
+    public <span class="keyword">void</span> setX(Integer x) {
+        <span class="keyword">this</span>.x = x;
+    }
+    @XmlTransient
+    public Integer getY() {
+        <span class="keyword">return</span> y;
+    }
+
+    public <span class="keyword">void</span> setY(Integer y) {
+        <span class="keyword">this</span>.y = y;
+    }
+    @XmlTransient
+    public Integer getWidth() {
+        <span class="keyword">return</span> width;
+    }
+
+    public <span class="keyword">void</span> setWidth(Integer width) {
+        <span class="keyword">this</span>.width = width;
+    }
+    @XmlTransient
+    public Integer getHeight() {
+        <span class="keyword">return</span> height;
+    }
+
+    public <span class="keyword">void</span> setHeight(Integer height) {
+        <span class="keyword">this</span>.height = height;
+    }
+}
+</code></pre>
+<p>在要用的地方直接静态代码块，加载一次，使用，比如：   </p>
+<pre><code class="javascript">private <span class="keyword">static</span>  PrintSettings printSettings;
+   <span class="keyword">static</span> {
+       <span class="keyword">try</span> {
+           <span class="comment">//读取Resource目录下的XML文件</span>
+           Resource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">"printSettings.xml"</span>);
+           <span class="comment">//利用输入流获取XML文件内容</span>
+           BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(resource.getInputStream(), <span class="string">"UTF-8"</span>));
+           StringBuffer buffer = <span class="keyword">new</span> StringBuffer();
+           <span class="built_in">String</span> line = <span class="string">""</span>;
+           <span class="keyword">while</span> ((line = br.readLine()) != <span class="literal">null</span>) {
+               buffer.append(line);
+           }
+           br.close();
+           <span class="comment">//XML转为JAVA对象</span>
+           PrintSettings settings = (PrintSettings) XmlBuilder.xmlStrToObject(PrintSettings.class, buffer.toString());
+           printSettings = settings;
+       }<span class="keyword">catch</span> (Exception e){
+           logger.error(<span class="string">"异常"</span>,e);
+       }
+   }</code></pre>
+<p>到此xml文件配置好了，也可以使用。<br><a href="https://gitee.com/Choleen95/SpringBoot-JavaPrint">代码已上传到gitee</a></p>
+
+        </div>
+        
+        
+        
     </div>
 </div>
 
-    
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/26/Work/JavaPrint2/">
+                <span class="level-item">springboot的java打印票据-2</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 </div>
                 
 
@@ -859,7 +1001,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/gen.svg" alt="山沉" height="28">
+                    <img src="/images/gen.svg" alt="SpringBoot的java打印票据-3" height="28">
                 
                 </a>
                 <p class="is-size-7">
