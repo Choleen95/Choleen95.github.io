@@ -1,8 +1,8 @@
 ---
 title: nodejs启动服务失败
 date: 2020-03-07 13:10:54
-tags:
-categories: 前端
+tags: nodeJs
+categories: WEB
 ---
 nodejs启动服务过程中难免遇到一些问题，此次我就遇到了node-sass安装后环境发生变化的问题。
 <!--more-->
