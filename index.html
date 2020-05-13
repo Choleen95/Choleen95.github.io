@@ -144,13 +144,13 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-26T15:41:20.880Z">2020-04-26</time>
+                <time class="level-item has-text-grey" datetime="2020-05-13T14:13:11.486Z">2020-05-13</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 165 个字)
+                    4 分钟 读完 (大约 611 个字)
                 </span>
                 
                 
@@ -159,14 +159,123 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/">Life/迎难而上</a>
+                <a class="has-link-black-ter" href="/2020/05/13/Work/itextpdf%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/">Work/itextpdf导出数据</a>
             
         </h1>
         <div class="content">
-            <hr>
-<p>title: 迎难而上<br>date: 2020-04-26 23:41<br>tags:<br>categories: Life</p>
-<hr>
-<p>###<strong><em>生活本苦，奈何年华</em></strong><br>我们再物欲横流的今天，静下心来想一想，生活再人的一生中是什么？我到底该去向那里。</p>
+            <h4 id="itextpdf导出数据"><a href="#itextpdf导出数据" class="headerlink" title="itextpdf导出数据"></a>itextpdf导出数据</h4><ul>
+<li><p>1.Maven种添入依赖</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;itextpdf&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.3.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;itext-asian&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>2.创建pdf工具类</p>
+</li>
+<li><p>3.组装数据进行填充和样式设置</p>
+<h5 id="创建PdfUtil"><a href="#创建PdfUtil" class="headerlink" title="创建PdfUtil"></a>创建PdfUtil</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cargo.trailer.orderManage.vo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itextpdf.text.*;</span><br><span class="line"><span class="keyword">import</span> com.itextpdf.text.pdf.BaseFont;</span><br><span class="line"><span class="keyword">import</span> com.itextpdf.text.pdf.PdfPCell;</span><br><span class="line"><span class="keyword">import</span> com.itextpdf.text.pdf.PdfPTable;</span><br><span class="line"><span class="keyword">import</span> com.itextpdf.text.pdf.PdfWriter;</span><br><span class="line"><span class="keyword">import</span> me.javy.helper.Helper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URLEncoder;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*填充数据--以日期空一行，列种不同的字段颜色不同</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PdfUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exportPdf</span><span class="params">(HttpServletRequest request, HttpServletResponse response, List&lt;List&lt;String&gt;&gt; lists, String fileName)</span> <span class="keyword">throws</span> IOException,DocumentException </span>&#123;</span><br><span class="line">        <span class="comment">// 告诉浏览器用什么软件可以打开此文件</span></span><br><span class="line">        response.setHeader(<span class="string">"content-Type"</span>, <span class="string">"application/pdf"</span>);</span><br><span class="line">        <span class="comment">// 导出文件的默认名称</span></span><br><span class="line">        response.setHeader(<span class="string">"Content-Disposition"</span>,<span class="string">"attachment;fileName="</span> + URLEncoder.encode(fileName + <span class="string">".pdf"</span>, <span class="string">"UTF-8"</span>));</span><br><span class="line">        BaseFont baseFont = BaseFont.createFont(<span class="string">"STSongStd-Light"</span>, <span class="string">"UniGB-UCS2-H"</span>, BaseFont.EMBEDDED);</span><br><span class="line">        <span class="comment">// 自定义字体属性</span></span><br><span class="line">        com.itextpdf.text.Font font = <span class="keyword">new</span> com.itextpdf.text.Font(baseFont, <span class="number">8</span>);</span><br><span class="line">        com.itextpdf.text.Font titleFont = <span class="keyword">new</span> com.itextpdf.text.Font(baseFont, <span class="number">10</span>);</span><br><span class="line">        Document document = <span class="keyword">new</span> Document(<span class="keyword">new</span> RectangleReadOnly(<span class="number">842F</span>,<span class="number">595F</span>));<span class="comment">//a4纸横向</span></span><br><span class="line">        PdfWriter.getInstance(document, response.getOutputStream());</span><br><span class="line">        document.open();<span class="comment">//文本开始</span></span><br><span class="line">        <span class="keyword">if</span> (lists.size() &gt; <span class="number">0</span> &amp;&amp; lists != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; lists.size(); i++) &#123;</span><br><span class="line">                PdfPTable table = <span class="keyword">new</span> PdfPTable(lists.get(i).size());</span><br><span class="line">                table.setWidthPercentage(<span class="number">100</span>);<span class="comment">//table100%</span></span><br><span class="line">                PdfPCell cell = <span class="keyword">new</span> PdfPCell();</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (lists.get(i).size() &gt; <span class="number">0</span> &amp;&amp; lists.get(i) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; lists.get(i).size(); j++) &#123;</span><br><span class="line">                            Paragraph p=<span class="keyword">new</span> Paragraph(lists.get(i).get(j), titleFont);</span><br><span class="line">                            p.setFont(titleFont);</span><br><span class="line">                            <span class="comment">// 水平居中</span></span><br><span class="line">                            cell.setHorizontalAlignment(Element.ALIGN_CENTER);</span><br><span class="line">                            cell.setPhrase(p);</span><br><span class="line">                            cell.setBackgroundColor(<span class="keyword">new</span> BaseColor(<span class="number">204</span>, <span class="number">204</span>, <span class="number">204</span>));</span><br><span class="line">                            <span class="comment">// 文档中加入该段落</span></span><br><span class="line">                            table.addCell(cell);</span><br><span class="line">                            document.add(table);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (lists.get(i).size() &gt; <span class="number">0</span> &amp;&amp; lists.get(i) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; lists.get(i).size(); j++) &#123;</span><br><span class="line">                            <span class="keyword">if</span>(<span class="string">"N"</span>.equals(lists.get(i).get(j)))&#123;<span class="comment">//不同日期之间空格</span></span><br><span class="line">                                Paragraph blankRow4 = <span class="keyword">new</span> Paragraph(<span class="number">18f</span>, <span class="string">" "</span>, font);</span><br><span class="line">                                document.add(blankRow4);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                                Paragraph p=<span class="keyword">new</span> Paragraph(lists.get(i).get(j),font);</span><br><span class="line">                                p.setFont(font);</span><br><span class="line">                                <span class="comment">// 设置段落居中，其中1为居中对齐，2为右对齐，3为左对齐</span></span><br><span class="line">                                <span class="comment">//给外派上颜色</span></span><br><span class="line">                                String field = lists.get(i).get(j);</span><br><span class="line">                                <span class="keyword">if</span>(<span class="string">"外派"</span>.equals(field))&#123;</span><br><span class="line">                                    PdfPCell wpCell = <span class="keyword">new</span> PdfPCell();</span><br><span class="line">                                    wpCell.setBackgroundColor(<span class="keyword">new</span> BaseColor(<span class="number">60</span>,<span class="number">179</span>,<span class="number">113</span>));</span><br><span class="line">                                    wpCell.setHorizontalAlignment(Element.ALIGN_CENTER);</span><br><span class="line">                                    wpCell.setPhrase(p);</span><br><span class="line">                                    table.addCell(wpCell);</span><br><span class="line">                                    document.add(table);</span><br><span class="line">                                    <span class="keyword">continue</span>;</span><br><span class="line">                                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Helper.isNotEmpty(field) &amp;&amp; j == <span class="number">3</span>)&#123;</span><br><span class="line">                                    PdfPCell wpCell = <span class="keyword">new</span> PdfPCell();</span><br><span class="line">                                    wpCell.setBackgroundColor(<span class="keyword">new</span> BaseColor(<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>));</span><br><span class="line">                                    				        wpCell.setHorizontalAlignment(Element.ALIGN_CENTER);</span><br><span class="line">                                    wpCell.setPhrase(p);</span><br><span class="line">                                    table.addCell(wpCell);</span><br><span class="line">                                    document.add(table);</span><br><span class="line">                                    <span class="keyword">continue</span>;</span><br><span class="line">                                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);</span><br><span class="line">                                    cell.setPhrase(p);</span><br><span class="line">                                    table.addCell(cell);</span><br><span class="line">                                    document.add(table);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            document.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="组装数据"><a href="#组装数据" class="headerlink" title="组装数据"></a>组装数据</h5><ul>
+<li><p>1.日期不同之间空一行。用order by date asc 查询数据。载这行和下一行比较，若不同，则增加一个List<String> 一个元素为N，用于之后填充时判断。</p>
+</li>
+<li><p>2.列的不同数据显示不同颜色。创建PdfPCell 对象，设置样式。</p>
+</li>
+<li><p>大约这样：</p>
+</li>
+<li><p><img src="http://img.yangjiapo.cn/QQ%E6%88%AA%E5%9B%BE20200513220908.png" alt="avatar"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-28T16:28:42.781Z">2020-04-29</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 4 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/29/Life/%E5%90%BE%E6%97%A5%E4%B8%89%E7%9C%81/">Life/吾日三省</a>
+            
+        </h1>
+        <div class="content">
+            <h4 id="吾日三省"><a href="#吾日三省" class="headerlink" title="吾日三省"></a>吾日三省</h4>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-26T15:41:00.000Z">2020-04-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Life/">Life</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 156 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/">迎难而上</a>
+            
+        </h1>
+        <div class="content">
+            <p>###<strong><em>生活本苦，奈何年华</em></strong><br>我们再物欲横流的今天，静下心来想一想，生活再人的一生中是什么？我到底该去向那里。</p>
         </div>
         
         
@@ -709,112 +818,6 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-16T12:35:54.000Z">2020-03-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Life/">Life</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 253 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/16/Life/2020%E5%B9%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%85%AC%E5%8F%B8%E4%B8%8A%E7%8F%AD/">今天复工，维护好累</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="维护今天的工作"><a href="#维护今天的工作" class="headerlink" title="维护今天的工作"></a>维护今天的工作</h3><p>&emsp;今天是我第一次正式维护工作，深知不易。代码可能没有几行，但大多数是在找前人写代码的漏洞，当然是客户给我们找到的。<br>找寻bug很费劲，还原bug更费劲。我大量的时间在跟客户交流，没有几行代码输出，有很大一部分的原因是眉毛胡子一把抓，没有分清主次，搞得很疲惫。
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/16/Life/2020%E5%B9%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%85%AC%E5%8F%B8%E4%B8%8A%E7%8F%AD/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T16:00:00.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/WEB/">WEB</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 175 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/313-ie/">ie浏览器的加载js不了的问题</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="2020年3月13日工作问题"><a href="#2020年3月13日工作问题" class="headerlink" title="2020年3月13日工作问题"></a>2020年3月13日工作问题</h3><pre><code>问题：在jsp页面，下有js文件没有加载出来，但是在f12下，刷新就加载出来了。        </code></pre>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/13/313-ie/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -879,7 +882,7 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            14
+                            16
                         </p>
                     </a>
                 </div>
@@ -980,7 +983,7 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
                 <span class="level-item">Life</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
@@ -1040,18 +1043,56 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
         
         <article class="media">
             
-            <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="media-left">
+            <a href="/2020/05/13/Work/itextpdf%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/迎难而上">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Work/itextpdf导出数据">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-26T15:41:20.880Z">2020-04-26</time></div>
-                    <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/迎难而上</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-13T14:13:11.486Z">2020-05-13</time></div>
+                    <a href="/2020/05/13/Work/itextpdf%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Work/itextpdf导出数据</a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/29/Life/%E5%90%BE%E6%97%A5%E4%B8%89%E7%9C%81/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/吾日三省">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-28T16:28:42.781Z">2020-04-29</time></div>
+                    <a href="/2020/04/29/Life/%E5%90%BE%E6%97%A5%E4%B8%89%E7%9C%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/吾日三省</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="迎难而上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-26T15:41:00.000Z">2020-04-26</time></div>
+                    <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">迎难而上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
                     </p>
                 </div>
             </div>
@@ -1095,44 +1136,6 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/28/Work/JavaPrint4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="springboot的java打印票据-4">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T14:27:00.000Z">2020-03-28</time></div>
-                    <a href="/2020/03/28/Work/JavaPrint4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">springboot的java打印票据-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/27/Work/Javaprint3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringBoot的java打印票据-3">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-27T15:38:53.072Z">2020-03-27</time></div>
-                    <a href="/2020/03/27/Work/Javaprint3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringBoot的java打印票据-3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1145,12 +1148,23 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2020/04/">
                 <span class="level-start">
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1217,18 +1231,56 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
         
         <article class="media">
             
-            <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="media-left">
+            <a href="/2020/05/13/Work/itextpdf%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/迎难而上">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Work/itextpdf导出数据">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-26T15:41:20.880Z">2020-04-26</time></div>
-                    <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/迎难而上</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-13T14:13:11.486Z">2020-05-13</time></div>
+                    <a href="/2020/05/13/Work/itextpdf%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Work/itextpdf导出数据</a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/29/Life/%E5%90%BE%E6%97%A5%E4%B8%89%E7%9C%81/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/吾日三省">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-28T16:28:42.781Z">2020-04-29</time></div>
+                    <a href="/2020/04/29/Life/%E5%90%BE%E6%97%A5%E4%B8%89%E7%9C%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/吾日三省</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="迎难而上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-26T15:41:00.000Z">2020-04-26</time></div>
+                    <a href="/2020/04/26/Life/%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">迎难而上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
                     </p>
                 </div>
             </div>
@@ -1272,44 +1324,6 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/28/Work/JavaPrint4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="springboot的java打印票据-4">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T14:27:00.000Z">2020-03-28</time></div>
-                    <a href="/2020/03/28/Work/JavaPrint4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">springboot的java打印票据-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/03/27/Work/Javaprint3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringBoot的java打印票据-3">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-27T15:38:53.072Z">2020-03-27</time></div>
-                    <a href="/2020/03/27/Work/Javaprint3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringBoot的java打印票据-3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1322,12 +1336,23 @@ $(<span class="function"><span class="keyword">function</span>(<span class="para
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2020/04/">
                 <span class="level-start">
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
