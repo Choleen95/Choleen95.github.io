@@ -297,7 +297,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 638 个字)
+                    4 分钟 读完 (大约 639 个字)
                 </span>
                 
                 
@@ -310,168 +310,17 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <p>工作中有时需要根据项目需求引入地图进行展示数据，现在做一个超简单的引入。推荐百度api，全是中文解释，很方便。<a href="http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11">百度API*</a><br><more></p>
-<h3 id="引入百度js"><a href="#引入百度js" class="headerlink" title="引入百度js"></a><strong><em>引入百度js</em></strong></h3><p>1.新建一个html页面，引入js</p>
-<pre><code class="javascript">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
-    &lt;meta http-equiv=<span class="string">"expires"</span> content=<span class="string">"0"</span>&gt;
-    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"IE=edge"</span>&gt;
-    &lt;meta content=<span class="string">"width=device-width, initial-scale=1"</span> name=<span class="string">"viewport"</span> /&gt;
-
-    &lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://api.map.baidu.com/api?v=3.0&amp;ak=gYR4wlvCmPyZYq8ggttE3fkGuBC5sOUB"</span>&gt;&lt;<span class="regexp">/script&gt;</span>
-<span class="regexp">    &lt;script type="text/</span>javascript<span class="string">" src="</span>/<span class="keyword">static</span>/lib/jquery.liMarquee/jquery.liMarquee.js<span class="string">"&gt;&lt;/script&gt;</span>
-<span class="string">    &lt;script&gt;</span>
-<span class="string">        (function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="</span>utf<span class="number">-8</span><span class="string">";d.async=1;c.parentNode.insertBefore(d,c)};a["</span>SeniverseWeatherWidgetObject<span class="string">"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("</span>onload<span class="string">",b)}else{a.addEventListener("</span>load<span class="string">",b,false)}}(window,document,"</span>script<span class="string">","</span>SeniverseWeatherWidget<span class="string">","</span>/<span class="keyword">static</span>/lib/xy.weather/widget2.bundle.js?t=<span class="string">"+parseInt((new Date().getTime() / 100000000).toString(),10)));</span>
-<span class="string">    &lt;/script&gt;</span>
-<span class="string">    &lt;script src="</span>js/TrackDisplayByBaidu.js<span class="string">"&gt;&lt;/script&gt;</span>
-<span class="string">    &lt;title&gt;轨迹图&lt;/title&gt;</span>
-<span class="string">    &lt;style type="</span>text/css<span class="string">"&gt;</span>
-<span class="string">                    .anchorBL{</span>
-<span class="string">                        display:none;</span>
-<span class="string">                    }</span>
-<span class="string">                &lt;/style&gt;</span>
-<span class="string">&lt;/head&gt;</span>
-<span class="string">&lt;body&gt;</span>
-<span class="string">     &lt;div id="</span>allmap<span class="string">"&gt;&lt;/div&gt;</span>
-<span class="string">&lt;/body&gt;</span>
-<span class="string">&lt;/html&gt;</span></code></pre>
-<p>这样html准备好了。<br>2.创建自定义的js文件        </p>
-<pre><code class="javascript"><span class="comment">/**</span>
-<span class="comment"> * 实时作业监控JS</span>
-<span class="comment"> */</span>
-<span class="keyword">var</span> map = <span class="literal">null</span>;
-<span class="keyword">var</span> marker = <span class="literal">null</span>;
-$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-    <span class="comment">// 百度地图API功能</span>
-    map = <span class="keyword">new</span> BMap.Map(<span class="string">"allmap"</span>, {
-        enableMapClick:<span class="literal">false</span>
-    });
-    map.centerAndZoom(<span class="string">"重庆"</span>, <span class="number">13</span>);
-    map.addControl(<span class="keyword">new</span> BMap.MapTypeControl({
-        mapTypes:[
-            BMAP_NORMAL_MAP,
-            BMAP_SATELLITE_MAP,
-            BMAP_HYBRID_MAP
-        ]}
-    ));
-    map.enableScrollWheelZoom(<span class="literal">true</span>);
-    <span class="comment">// 添加比例尺控件</span>
-    map.addControl(<span class="keyword">new</span> BMap.ScaleControl());
-    <span class="comment">// 初始化图标</span>
-    $(<span class="string">'#allmap div.anchorBL'</span>).hide()
-
-    $(<span class="string">"#search_button"</span>).linkbutton({
-       text:<span class="string">'搜索'</span>,
-       iconCls:<span class="string">'icon-search'</span>,
-       onClick:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-           <span class="comment">//获取参数</span>
-           map.clearOverlays();
-
-           $.ajax({
-               url:<span class="string">'json/comment.json'</span>,
-               method: <span class="string">"post"</span>,
-               dataType: <span class="string">"json"</span>,
-               data: params,
-               <span class="keyword">async</span>: <span class="literal">false</span>,
-               success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
-                  $.each(data.rows,<span class="function"><span class="keyword">function</span> (<span class="params">i,obj</span>) </span>{
-                     <span class="keyword">if</span>(obj.start_longitude){
-                         doLocate(obj.start_longitude,obj.start_latitude,obj);
-                     }
-                     <span class="keyword">if</span>(obj.end_longitude){
-                         doLocate(obj.end_longitude,obj.end_latitude,obj);
-                     }
-                  });
-               }
-           });
-       } 
-    });
-});
-<span class="function"><span class="keyword">function</span> <span class="title">doLocate</span>(<span class="params">jd, wd,data</span>) </span>{<span class="comment">//根据经纬度定位</span>
-   <span class="keyword">var</span> point = <span class="keyword">new</span> BMap.Point(jd, wd);
-    marker = <span class="keyword">new</span> BMap.Marker(point);
-    map.addOverlay(marker);
-    marker.enableDragging(); <span class="comment">//启用标注拖动</span>
-  <span class="keyword">if</span>(data){
-      <span class="keyword">var</span> taskId = data.trailer_task_id;
-      <span class="keyword">var</span> distance = data.distance;
-       <span class="keyword">var</span> opts = {
-           width: <span class="number">210</span>, <span class="comment">// 信息窗口宽度</span>
-           height: <span class="number">125</span>, <span class="comment">// 信息窗口高度</span>
-           title: <span class="string">"&lt;a href='javascript:;' onclick=\"generateTrack('"</span>+taskId+<span class="string">"','"</span>+distance+<span class="string">"')\"&gt;对应站点生成轨迹&lt;/a&gt;"</span>, <span class="comment">// 信息窗口标题</span>
-           enableMessage: <span class="literal">true</span>, <span class="comment">//设置允许信息窗发送短息</span>
-           message: <span class="string">""</span>
-       };
-       <span class="keyword">var</span> content = <span class="string">"起始地:"</span>+ data.start_place+<span class="string">"&lt;br&gt;目的地:"</span>+data.end_place+ <span class="string">"&lt;br&gt;经度:"</span> + jd + <span class="string">"&lt;br&gt;纬度:"</span> + wd;
-       <span class="keyword">var</span> infoWindow = <span class="keyword">new</span> BMap.InfoWindow(content, opts); <span class="comment">// 创建信息窗口对象</span>
-
-       marker.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-           map.openInfoWindow(infoWindow, point); <span class="comment">//开启信息窗口</span>
-       });
-   }
-
-}
-<span class="function"><span class="keyword">function</span> <span class="title">generateTrack</span>(<span class="params">taskId,distance</span>)</span>{
-    <span class="built_in">console</span>.info(taskId);
-    <span class="comment">// 查询人员行进轨迹--画线</span>
-    $.ajax({
-        url : <span class="string">"json/location.json"</span>,
-        method : <span class="string">"post"</span>,
-        dataType : <span class="string">"json"</span>,
-        <span class="keyword">async</span> : <span class="literal">false</span>,
-        success : <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
-            <span class="comment">// 添加个人轨迹</span>
-            <span class="keyword">var</span> points = [];
-            <span class="keyword">var</span> rows = data.rows;
-            $.each(rows, <span class="function"><span class="keyword">function</span> (<span class="params">i, obj</span>) </span>{
-                <span class="keyword">var</span> currentTaksId = rows[i].taskId;
-               <span class="keyword">if</span>(currentTaksId == taskId){
-                   $.each(rows[i].data,<span class="function"><span class="keyword">function</span> (<span class="params">j,data</span>) </span>{
-                       <span class="keyword">var</span> point = <span class="keyword">new</span> BMap.Point(data.longitude,data.latitude);
-                       points.push(point);
-                       <span class="keyword">if</span>(j == <span class="number">0</span>){
-                           map.setCenter(point);
-                       }
-                   });
-                   $(<span class="string">"#driver_naem"</span>).html(rows[i].driverName);
-               }
-            });
-            <span class="keyword">var</span> sy = <span class="keyword">new</span> BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
-                scale: <span class="number">0.6</span>,
-                strokeColor:<span class="string">'#fff'</span>,
-                strokeWeight: <span class="string">'2'</span>,
-            });
-            <span class="keyword">var</span> icons = <span class="keyword">new</span> BMap.IconSequence(sy, <span class="string">'10'</span>, <span class="string">'10'</span>);
-            <span class="keyword">var</span> polyline =<span class="keyword">new</span> BMap.Polyline(points, {
-                enableEditing: <span class="literal">false</span>,
-                enableClicking: <span class="literal">true</span>,
-                icons:[icons],
-                strokeWeight:<span class="string">'8'</span>,
-                strokeOpacity: <span class="number">0.8</span>,
-                strokeColor:<span class="string">"#ff5c34"</span>
-            });
-            map.addOverlay(polyline);
-            <span class="keyword">var</span> juli = <span class="number">0</span>;
-            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; points.length; i++) {
-               <span class="keyword">if</span>(i == points.length <span class="number">-1</span>){
-                   <span class="keyword">break</span>;
-               }
-                juli += getDistance(points[i],points[i+<span class="number">1</span>]);
-            }
-            $(<span class="string">"#current_mileage"</span>).html(distance+<span class="string">"/km"</span>);
-            $(<span class="string">"#latest_mileage"</span>).html((<span class="built_in">Math</span>.round(juli/<span class="number">100</span>)/<span class="number">10</span>).toFixed(<span class="number">1</span>)+<span class="string">"/km"</span>);
-        }
-    });
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">getDistance</span>(<span class="params">startPoint, endPoint</span>) </span>{
-     <span class="keyword">return</span> map.getDistance(startPoint ,endPoint);
-}</code></pre>
-
+            <p>工作中有时需要根据项目需求引入地图进行展示数据，现在做一个超简单的引入。推荐百度api，全是中文解释，很方便。<a href="http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11">百度API*</a></p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/04/19/Work/Js%E5%BC%95%E5%85%A5%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
