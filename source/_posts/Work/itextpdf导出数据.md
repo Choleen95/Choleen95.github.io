@@ -1,5 +1,6 @@
-#### itextpdf导出数据 ####
-
+#### itextpdf导出数据 ####      
+这是一个导出数据为pdf的demo。
+<!--more-->
 * 1.Maven种添入依赖
 
   ```java

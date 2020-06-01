@@ -5,7 +5,7 @@ tags:
 categories: JS
 ---
 工作中有时需要根据项目需求引入地图进行展示数据，现在做一个超简单的引入。推荐百度api，全是中文解释，很方便。[百度API*](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11)
-<more>
+<!--more-->
 ### ***引入百度js***
 1.新建一个html页面，引入js
 ```javascript
