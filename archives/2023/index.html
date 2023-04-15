@@ -7,19 +7,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>CentOs7安装Redis5.0.7 - 山沉</title>
+<title>归档: 2023 - 山沉</title>
 
 
-    <meta name="description" content="安装Ruby语言0.查看哪些是稳定版 http:&#x2F;&#x2F;www.ruby-lang.org&#x2F;zh_cn&#x2F;downloads&#x2F; 1.网站下载 https:&#x2F;&#x2F;cache.ruby-china.com&#x2F;pub&#x2F;ruby&#x2F;ruby-2.6.6.tar.xz 2.也可以wget下载 1wget https:&#x2F;&#x2F;cache.ruby-lang.org&#x2F;pub&#x2F;ruby&#x2F;2.5&#x2F;ruby-6.6.6.tar.gz">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CentOs7安装Redis5.0.7">
-<meta property="og:url" content="http://choleen95.github.io/2020/09/05/3b63363d.html">
+    <meta name="description" content="learn to something">
+<meta property="og:type" content="website">
+<meta property="og:title" content="山沉">
+<meta property="og:url" content="http://choleen95.github.io/archives/2023/index.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="安装Ruby语言0.查看哪些是稳定版 http:&#x2F;&#x2F;www.ruby-lang.org&#x2F;zh_cn&#x2F;downloads&#x2F; 1.网站下载 https:&#x2F;&#x2F;cache.ruby-china.com&#x2F;pub&#x2F;ruby&#x2F;ruby-2.6.6.tar.xz 2.也可以wget下载 1wget https:&#x2F;&#x2F;cache.ruby-lang.org&#x2F;pub&#x2F;ruby&#x2F;2.5&#x2F;ruby-6.6.6.tar.gz">
+<meta property="og:description" content="learn to something">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-09-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-05T17:29:44.084Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -89,7 +87,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/gen.svg" alt="CentOs7安装Redis5.0.7" height="28">
+                <img src="/images/gen.svg" alt="山沉" height="28">
             
             </a>
         </div>
@@ -139,151 +137,76 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-04T16:00:00.000Z">2020-09-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 447 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                CentOs7安装Redis5.0.7
-            
-        </h1>
-        <div class="content">
-            <h3 id="安装Ruby语言"><a href="#安装Ruby语言" class="headerlink" title="安装Ruby语言"></a>安装Ruby语言</h3><p>0.查看哪些是稳定版</p>
-<p><a href="http://www.ruby-lang.org/zh_cn/downloads/">http://www.ruby-lang.org/zh_cn/downloads/</a></p>
-<p>1.网站下载</p>
-<p><a href="https://cache.ruby-china.com/pub/ruby/ruby-2.6.6.tar.xz">https://cache.ruby-china.com/pub/ruby/ruby-2.6.6.tar.xz</a></p>
-<p>2.也可以wget下载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cache.ruby-lang.org/pub/ruby/2.5/ruby-6.6.6.tar.gz</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>3.若没有xz，先安装xz</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xz ruby-2.6.6.tar.xz</span><br><span class="line">tar -vxf ruby-2.6.6.tar</span><br><span class="line">mv ruby-2.6.6 /usr/<span class="built_in">local</span>/</span><br><span class="line">mkdir ruby</span><br><span class="line"><span class="built_in">cd</span> ruby-2.6.6/</span><br><span class="line">.configure --prefix=/usr/<span class="built_in">local</span>/ruby</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line">./ruby -v</span><br></pre></td></tr></table></figure>
 
-<p>4.上面没有问题，配置环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$PATH</span>:/usr/local/ruby/bin"</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装redis5-0-7"><a href="#安装redis5-0-7" class="headerlink" title="安装redis5.0.7"></a>安装redis5.0.7</h3><p>1.网站下载</p>
-<p><a href="http://download.redis.io/releases/">http://download.redis.io/releases/</a></p>
-<p>2.解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf redis-5.0.7.tar.gz</span><br><span class="line">mv redis-5.0.7 /usr/<span class="built_in">local</span>/</span><br><span class="line">mkdir redis</span><br></pre></td></tr></table></figure>
-
-<p>3.简易配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.7/</span><br><span class="line">vim redis.conf</span><br><span class="line">----ctrl+ins复制</span><br><span class="line"><span class="comment">#bind 127.0.0.1</span></span><br><span class="line"> protected-mode no</span><br><span class="line"> timeout 3600</span><br><span class="line"> daemonize yes</span><br></pre></td></tr></table></figure>
-
-<p>4.安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.7/</span><br><span class="line">make</span><br><span class="line">make install prefix=/usr/<span class="built_in">local</span>/redis</span><br><span class="line"><span class="built_in">cd</span> ../redis</span><br><span class="line">mkdir etc</span><br><span class="line"><span class="built_in">cd</span> etc</span><br><span class="line">mkdir <span class="built_in">log</span></span><br><span class="line">cp /usr/<span class="built_in">local</span>/redis-5.0.7/redis.conf /usr/<span class="built_in">local</span>/redis/etc/</span><br></pre></td></tr></table></figure>
-
-<p>5.启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis/bin</span><br><span class="line">./redis-server ../etc/redis.conf</span><br><span class="line">./redis-cli -c -p 6379</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/723-2.png" alt="avatar"></p>
-<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><p>1.配置redis.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis</span><br><span class="line">mkdir etc</span><br><span class="line">mkdir <span class="built_in">log</span></span><br><span class="line"><span class="built_in">cd</span> etc</span><br><span class="line">mkdir 8000 8001 8002 8003 8004 8005</span><br><span class="line">cp /usr/<span class="built_in">local</span>/redis-5.0.7/redis.conf /usr/<span class="built_in">local</span>/redis/etc/8000/</span><br><span class="line">vim 8000/redis.conf</span><br><span class="line">--</span><br><span class="line">logfile <span class="string">"/usr/local/redis/log/6379.log"</span></span><br><span class="line">dbfilename dump8000.rdb</span><br><span class="line">appendonly yes</span><br><span class="line">appendfilename <span class="string">"appendonly6379.aof"</span></span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_8000.conf </span><br><span class="line">cluster-node-timeout 15000 </span><br><span class="line">:%s/6379/8000/g</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/723-1.png" alt="avatar"></p>
-<p><strong>2.创建集群，8003，8004，8005之后分</strong></p>
-<p><img src="http://img.yangjiapo.cn/724-2.png" alt="avatar"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 192.168.246.130:8000 192.168.246.130:8001</span><br><span class="line">192.168.246.130:8002</span><br></pre></td></tr></table></figure>
-
-<p><strong>3.登录</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cluster info</span><br><span class="line">cluster nodes</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/724-1.png" alt="avator"></p>
-<p><strong>4.动态添加节点，启动8003，8004，8005</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8005 192.168.246.130:8000</span><br><span class="line">redis-cli -c -p 8000</span><br><span class="line">cluster info </span><br><span class="line">cluster nodes</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/724-3.png" alt="avatar"></p>
-<p>查看状态</p>
-<p><img src="http://img.yangjiapo.cn/724-3.png" alt="avatar"></p>
-<p><strong>5.动态添加从节点</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8003 192.168.246.130:8000 --cluster-slave --cluster-master-id 25f77d1d595a1b7bad8f14058914792fcc3bad4a</span><br><span class="line">redis-cli --cluster add-node 192.168.246.130:8004 192.168.246.130:8001 --cluster-slave --cluster-master-id 5e2633717488152e8e8ad640b73b5b937e1d08aa</span><br><span class="line">redis-cli --cluster add-node 192.168.246.130:8005 192.168.246.130:8002 --cluster-slave --cluster-master-id 75c81e6f02e8e9cd32235b65a35f6f54d08b01b1</span><br></pre></td></tr></table></figure>
-
-<p><strong>6.一键添加节点</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8000 192.168.246.130:8001 192.168.246.130:8002 192.168.246.130:8003 192.168.246.130:8004 192.168.246.130:8005 --cluster-replicas 1</span><br></pre></td></tr></table></figure>
-
-<p>一主一丛</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/10/05/b846387f.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Redis的分布式锁</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/09/05/dfc98018.html">
-                <span class="level-item">CentOs7安装Rabbitmq</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
+<div class="card widget">
     <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        <h3 class="tag is-link">
+        2023
+        </h3>
+        <div class="timeline">
         
-<script>
-    var disqus_config = function () {
-        this.page.url = 'http://choleen95.github.io/2020/09/05/3b63363d.html';
-        this.page.identifier = '2020/09/05/3b63363d.html';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2023-03-07T05:10:54.000Z">2023-03-07</time>
+                        <a href="/2023/03/07/1ce21b5d.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">收集的计算机基础</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/%E4%BA%BA%E7%94%9F/">人生</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time>
+                        <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2023找工作记</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/Life/">Life</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time>
+                        <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">ElasticSearch7.10配置Search-Guard之配置用户</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+        </div>
     </div>
 </div>
+
+
 </div>
                 
 
@@ -1015,7 +938,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/gen.svg" alt="CentOs7安装Redis5.0.7" height="28">
+                    <img src="/images/gen.svg" alt="山沉" height="28">
                 
                 </a>
                 <p class="is-size-7">
