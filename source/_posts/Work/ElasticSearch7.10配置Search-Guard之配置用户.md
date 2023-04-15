@@ -1,3 +1,11 @@
+```
+title: ElasticSearch7.10配置Search-Guard之配置用户
+categories: Elastic
+abbrlink: efa6925a
+date: 2023-03-06 00:00:00
+tags:
+```
+
 ## ElasticSearch7.10配置Search-Guard之配置用户
 
 ![](http://img.yangjiapo.cn/ElasticSearcch/角色配置.png)
