@@ -1,8 +1,9 @@
 ---
 title: springboot的java打印票据-2
-date: 2020-03-26 21:11
-tags:
+date: '2020-03-26 21:11'
 categories: SpringBoot
+abbrlink: fabea79c
+tags:
 ---
 ### **Java打印之httpClient服务**
 前面我们配置了httpClient实例，现在我们配置服务，我们配置get和post请求，用于之后的请求。    

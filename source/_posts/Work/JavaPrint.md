@@ -1,8 +1,9 @@
 ---
 title: springboot的java打印票据
-date: 2020-03-25 22:43
-tags:
+date: '2020-03-25 22:43'
 categories: SpringBoot
+abbrlink: f4f56a79
+tags:
 ---
 ### **Java打印的几个步骤**
 - 1构建springboot框架

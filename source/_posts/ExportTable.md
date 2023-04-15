@@ -1,8 +1,9 @@
 ---
 title: Postgresql导出数据字典
-date: 2020-03-07 17:01:00
 tags: Python
 categories: Python
+abbrlink: 5ef69155
+date: 2020-03-07 17:01:00
 ---
 这是在工作中，有时会遇到的问题，要求完善数据字典。这里是python导出Postgresql表的字典，仅供参考。
 <!--more-->

@@ -1,8 +1,9 @@
 ---
 title: springboot的java打印票据-4
-date: 2020-03-28 22:27
-tags:
+date: '2020-03-28 22:27'
 categories: SpringBoot
+abbrlink: 13dd02a9
+tags:
 ---
 ### ***java打印***
 经过前几次的配置与解析，现在来说下java打印。java的api打印可以有字符串,画线，图片等。我们这里只用这两种。  

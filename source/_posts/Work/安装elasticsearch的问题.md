@@ -1,4 +1,10 @@
-#### 安装elasticsearch的问题 ####
+---
+title: 安装elasticsearch的问题
+categories: Elastic
+abbrlink: efa6925a
+date: 2021-03-05 00:00:00
+tags:
+---
 
 * 1.cannot assign requested address:bind
 

@@ -1,8 +1,9 @@
 ---
 title: Js引入百度地图
-date: 2020-04-19 21:01
-tags:
+date: '2020-04-19 21:01'
 categories: JS
+abbrlink: b80605eb
+tags:
 ---
 工作中有时需要根据项目需求引入地图进行展示数据，现在做一个超简单的引入。推荐百度api，全是中文解释，很方便。[百度API*](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11)
 <!--more-->

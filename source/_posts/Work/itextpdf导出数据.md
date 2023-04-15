@@ -1,4 +1,10 @@
-#### itextpdf导出数据 ####      
+---
+title: itextpdf导出数据
+categories: Python
+abbrlink: a3b4f1bf
+date: 2020-11-05 00:00:00
+tags:
+---
 这是一个导出数据为pdf的demo。
 <!--more-->
 * 1.Maven种添入依赖

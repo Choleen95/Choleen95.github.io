@@ -1,8 +1,9 @@
 ---
 title: Python导出SqlServer数据字典
-date: 2020-03-17
-tags:
 categories: Python
+abbrlink: '5226e067'
+date: 2020-03-17 00:00:00
+tags:
 ---
 ### 定义三个方法
 1.定义一个获取数据的getData()方法  

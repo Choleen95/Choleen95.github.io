@@ -1,8 +1,9 @@
 ---
 title: hexo+icarus搭建的第一个博客
+categories: 人生
+abbrlink: 1ce21b5d
 date: 2020-03-07 13:10:54
 tags:
-categories: 人生
 ---
 博客的搭建过程中，才发现自己会的东西挺少。今后会继续学习，持之以恒，参考了的一些资料，总算搭建了一个hexo+icarus实现的博客。
 <!--more-->

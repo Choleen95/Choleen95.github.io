@@ -1,8 +1,9 @@
 ---
 title: SpringBoot的java打印票据-3
 date: 2020-03-27 23：39
-tags:
 categories: SpringBoot
+abbrlink: 3a1bc5b7
+tags:
 ---
 ### ***配置打印xml文件并解析***
 打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。        
