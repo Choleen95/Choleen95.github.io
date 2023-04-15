@@ -10,6 +10,8 @@ tags:
 
 ![](http://img.yangjiapo.cn/ElasticSearcch/角色配置.png)
 
+<!--more-->
+
 ### 配置sg_internal_user.yml
 
 密码是：elastic
