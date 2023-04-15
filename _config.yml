@@ -15,7 +15,11 @@ timezone: ''
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: 'http://Choleen95.github.io/'
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :year/:month/:day/:abbrlink.html
+# 计算一个地址
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -41,7 +45,8 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+# 是否启动资源文件夹，开启后通过 hexo new :title.md 生成新文章会建立一个同名的文件夹
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
