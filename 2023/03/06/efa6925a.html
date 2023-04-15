@@ -7,19 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>CentOs7安装Redis5.0.7 - 山沉</title>
+<title>ElasticSearch7.10配置Search-Guard之配置用户 - 山沉</title>
 
 
-    <meta name="description" content="安装Ruby语言0.查看哪些是稳定版 http:&#x2F;&#x2F;www.ruby-lang.org&#x2F;zh_cn&#x2F;downloads&#x2F; 1.网站下载 https:&#x2F;&#x2F;cache.ruby-china.com&#x2F;pub&#x2F;ruby&#x2F;ruby-2.6.6.tar.xz 2.也可以wget下载 1wget https:&#x2F;&#x2F;cache.ruby-lang.org&#x2F;pub&#x2F;ruby&#x2F;2.5&#x2F;ruby-6.6.6.tar.gz">
+    <meta name="description" content="ElasticSearch7.10配置Search-Guard之配置用户">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOs7安装Redis5.0.7">
-<meta property="og:url" content="http://choleen95.github.io/2020/09/05/3b63363d.html">
+<meta property="og:title" content="ElasticSearch7.10配置Search-Guard之配置用户">
+<meta property="og:url" content="http://choleen95.github.io/2023/03/06/efa6925a.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="安装Ruby语言0.查看哪些是稳定版 http:&#x2F;&#x2F;www.ruby-lang.org&#x2F;zh_cn&#x2F;downloads&#x2F; 1.网站下载 https:&#x2F;&#x2F;cache.ruby-china.com&#x2F;pub&#x2F;ruby&#x2F;ruby-2.6.6.tar.xz 2.也可以wget下载 1wget https:&#x2F;&#x2F;cache.ruby-lang.org&#x2F;pub&#x2F;ruby&#x2F;2.5&#x2F;ruby-6.6.6.tar.gz">
+<meta property="og:description" content="ElasticSearch7.10配置Search-Guard之配置用户">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-09-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-05T17:29:44.084Z">
+<meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-15T16:13:12.533Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -89,7 +89,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/gen.svg" alt="CentOs7安装Redis5.0.7" height="28">
+                <img src="/images/gen.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户" height="28">
             
             </a>
         </div>
@@ -145,17 +145,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-04T16:00:00.000Z">2020-09-05</time>
+                <time class="level-item has-text-grey" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 447 个字)
+                    4 分钟 读完 (大约 667 个字)
                 </span>
                 
                 
@@ -169,63 +169,80 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                CentOs7安装Redis5.0.7
+                ElasticSearch7.10配置Search-Guard之配置用户
             
         </h1>
         <div class="content">
-            <h3 id="安装Ruby语言"><a href="#安装Ruby语言" class="headerlink" title="安装Ruby语言"></a>安装Ruby语言</h3><p>0.查看哪些是稳定版</p>
-<p><a href="http://www.ruby-lang.org/zh_cn/downloads/">http://www.ruby-lang.org/zh_cn/downloads/</a></p>
-<p>1.网站下载</p>
-<p><a href="https://cache.ruby-china.com/pub/ruby/ruby-2.6.6.tar.xz">https://cache.ruby-china.com/pub/ruby/ruby-2.6.6.tar.xz</a></p>
-<p>2.也可以wget下载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://cache.ruby-lang.org/pub/ruby/2.5/ruby-6.6.6.tar.gz</span><br></pre></td></tr></table></figure>
+            <h2 id="ElasticSearch7-10配置Search-Guard之配置用户"><a href="#ElasticSearch7-10配置Search-Guard之配置用户" class="headerlink" title="ElasticSearch7.10配置Search-Guard之配置用户"></a>ElasticSearch7.10配置Search-Guard之配置用户</h2><p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E8%A7%92%E8%89%B2%E9%85%8D%E7%BD%AE.png" alt></p>
 <a id="more"></a>
-<p>3.若没有xz，先安装xz</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xz ruby-2.6.6.tar.xz</span><br><span class="line">tar -vxf ruby-2.6.6.tar</span><br><span class="line">mv ruby-2.6.6 /usr/<span class="built_in">local</span>/</span><br><span class="line">mkdir ruby</span><br><span class="line"><span class="built_in">cd</span> ruby-2.6.6/</span><br><span class="line">.configure --prefix=/usr/<span class="built_in">local</span>/ruby</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line">./ruby -v</span><br></pre></td></tr></table></figure>
 
-<p>4.上面没有问题，配置环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$PATH</span>:/usr/local/ruby/bin"</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
+<h3 id="配置sg-internal-user-yml"><a href="#配置sg-internal-user-yml" class="headerlink" title="配置sg_internal_user.yml"></a>配置sg_internal_user.yml</h3><p>密码是：elastic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">jode:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">hash</span>: <span class="variable">$2y</span><span class="variable">$12</span><span class="variable">$nUzkcjdnufzvI1HlmN7xSuND3skGhmwV5le5IINejz</span>.asMFpLYNRy</span><br><span class="line"></span><br><span class="line">  backend_roles:</span><br><span class="line"></span><br><span class="line">  - <span class="string">"hr_department"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">psmith:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">hash</span>: <span class="variable">$2y</span><span class="variable">$12</span><span class="variable">$nUzkcjdnufzvI1HlmN7xSuND3skGhmwV5le5IINejz</span>.asMFpLYNRy</span><br><span class="line"></span><br><span class="line">  backend_roles:</span><br><span class="line"></span><br><span class="line">  - <span class="string">"hr_department"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cmaddock:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">hash</span>: <span class="variable">$2y</span><span class="variable">$12</span><span class="variable">$nUzkcjdnufzvI1HlmN7xSuND3skGhmwV5le5IINejz</span>.asMFpLYNRy</span><br><span class="line"></span><br><span class="line">  backend_roles:</span><br><span class="line"></span><br><span class="line">  - <span class="string">"devops"</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="安装redis5-0-7"><a href="#安装redis5-0-7" class="headerlink" title="安装redis5.0.7"></a>安装redis5.0.7</h3><p>1.网站下载</p>
-<p><a href="http://download.redis.io/releases/">http://download.redis.io/releases/</a></p>
-<p>2.解压</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -vxf redis-5.0.7.tar.gz</span><br><span class="line">mv redis-5.0.7 /usr/<span class="built_in">local</span>/</span><br><span class="line">mkdir redis</span><br></pre></td></tr></table></figure>
 
-<p>3.简易配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.7/</span><br><span class="line">vim redis.conf</span><br><span class="line">----ctrl+ins复制</span><br><span class="line"><span class="comment">#bind 127.0.0.1</span></span><br><span class="line"> protected-mode no</span><br><span class="line"> timeout 3600</span><br><span class="line"> daemonize yes</span><br></pre></td></tr></table></figure>
 
-<p>4.安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.7/</span><br><span class="line">make</span><br><span class="line">make install prefix=/usr/<span class="built_in">local</span>/redis</span><br><span class="line"><span class="built_in">cd</span> ../redis</span><br><span class="line">mkdir etc</span><br><span class="line"><span class="built_in">cd</span> etc</span><br><span class="line">mkdir <span class="built_in">log</span></span><br><span class="line">cp /usr/<span class="built_in">local</span>/redis-5.0.7/redis.conf /usr/<span class="built_in">local</span>/redis/etc/</span><br></pre></td></tr></table></figure>
+<h3 id="sg-roles-yml"><a href="#sg-roles-yml" class="headerlink" title="sg_roles.yml"></a>sg_roles.yml</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">sg_human_resources:</span><br><span class="line"></span><br><span class="line">  cluster_permissions:</span><br><span class="line"></span><br><span class="line">​     - <span class="string">"SGS_CLUSTER_COMPOSITE_OPS"</span></span><br><span class="line"></span><br><span class="line">  index_permissions:</span><br><span class="line"></span><br><span class="line">​     - index_patterns:</span><br><span class="line"></span><br><span class="line">​       - <span class="string">"humanresources"</span></span><br><span class="line"></span><br><span class="line">​       allowed_actions:</span><br><span class="line"></span><br><span class="line">​         - <span class="string">"SGS_READ"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sg_devops:</span><br><span class="line"></span><br><span class="line">  cluster_permissions:</span><br><span class="line"></span><br><span class="line">​     - <span class="string">"SGS_CLUSTER_COMPOSITE_OPS"</span></span><br><span class="line"></span><br><span class="line">  index_permissions:</span><br><span class="line"></span><br><span class="line">​     - index_patterns:</span><br><span class="line"></span><br><span class="line">​       - <span class="string">"infrastructure"</span></span><br><span class="line"></span><br><span class="line">​       allowed_actions:</span><br><span class="line"></span><br><span class="line">​         - <span class="string">"SGS_READ"</span></span><br><span class="line"></span><br><span class="line">​         - <span class="string">"SGS_WRITE"</span></span><br><span class="line"></span><br><span class="line">​     - index_patterns:</span><br><span class="line"></span><br><span class="line">​        - <span class="string">"logs-*"</span></span><br><span class="line"></span><br><span class="line">​        allowed_actions:</span><br><span class="line"></span><br><span class="line">​          - <span class="string">"SGS_READ"</span></span><br></pre></td></tr></table></figure>
 
-<p>5.启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis/bin</span><br><span class="line">./redis-server ../etc/redis.conf</span><br><span class="line">./redis-cli -c -p 6379</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://img.yangjiapo.cn/723-2.png" alt="avatar"></p>
-<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><p>1.配置redis.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis</span><br><span class="line">mkdir etc</span><br><span class="line">mkdir <span class="built_in">log</span></span><br><span class="line"><span class="built_in">cd</span> etc</span><br><span class="line">mkdir 8000 8001 8002 8003 8004 8005</span><br><span class="line">cp /usr/<span class="built_in">local</span>/redis-5.0.7/redis.conf /usr/<span class="built_in">local</span>/redis/etc/8000/</span><br><span class="line">vim 8000/redis.conf</span><br><span class="line">--</span><br><span class="line">logfile <span class="string">"/usr/local/redis/log/6379.log"</span></span><br><span class="line">dbfilename dump8000.rdb</span><br><span class="line">appendonly yes</span><br><span class="line">appendfilename <span class="string">"appendonly6379.aof"</span></span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes_8000.conf </span><br><span class="line">cluster-node-timeout 15000 </span><br><span class="line">:%s/6379/8000/g</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://img.yangjiapo.cn/723-1.png" alt="avatar"></p>
-<p><strong>2.创建集群，8003，8004，8005之后分</strong></p>
-<p><img src="http://img.yangjiapo.cn/724-2.png" alt="avatar"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 192.168.246.130:8000 192.168.246.130:8001</span><br><span class="line">192.168.246.130:8002</span><br></pre></td></tr></table></figure>
 
-<p><strong>3.登录</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cluster info</span><br><span class="line">cluster nodes</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://img.yangjiapo.cn/724-1.png" alt="avator"></p>
-<p><strong>4.动态添加节点，启动8003，8004，8005</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8005 192.168.246.130:8000</span><br><span class="line">redis-cli -c -p 8000</span><br><span class="line">cluster info </span><br><span class="line">cluster nodes</span><br></pre></td></tr></table></figure>
+<h3 id="sg-roles-mapping-yml"><a href="#sg-roles-mapping-yml" class="headerlink" title="sg_roles_mapping.yml"></a>sg_roles_mapping.yml</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sg_human_resources:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">backend_roles:</span></span><br><span class="line"></span><br><span class="line"><span class="string">​</span>     <span class="bullet">-</span> <span class="string">"hr_department"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">sg_devops:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">backend_roles:</span></span><br><span class="line"></span><br><span class="line"><span class="string">​</span>     <span class="bullet">-</span> <span class="string">"devops"</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://img.yangjiapo.cn/724-3.png" alt="avatar"></p>
-<p>查看状态</p>
-<p><img src="http://img.yangjiapo.cn/724-3.png" alt="avatar"></p>
-<p><strong>5.动态添加从节点</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8003 192.168.246.130:8000 --cluster-slave --cluster-master-id 25f77d1d595a1b7bad8f14058914792fcc3bad4a</span><br><span class="line">redis-cli --cluster add-node 192.168.246.130:8004 192.168.246.130:8001 --cluster-slave --cluster-master-id 5e2633717488152e8e8ad640b73b5b937e1d08aa</span><br><span class="line">redis-cli --cluster add-node 192.168.246.130:8005 192.168.246.130:8002 --cluster-slave --cluster-master-id 75c81e6f02e8e9cd32235b65a35f6f54d08b01b1</span><br></pre></td></tr></table></figure>
 
-<p><strong>6.一键添加节点</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster add-node 192.168.246.130:8000 192.168.246.130:8001 192.168.246.130:8002 192.168.246.130:8003 192.168.246.130:8004 192.168.246.130:8005 --cluster-replicas 1</span><br></pre></td></tr></table></figure>
 
-<p>一主一丛</p>
+
+
+<h3 id="sgadmin命令"><a href="#sgadmin命令" class="headerlink" title="sgadmin命令"></a>sgadmin命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">./sgadmin.sh -<span class="built_in">cd</span> ../sgconfig/ </span><br><span class="line"></span><br><span class="line">-cert /home/software/es_ssl/es/config/certs/kirk.crtfull.pem</span><br><span class="line"></span><br><span class="line">-key /home/software/es_ssl/es/config/certs/kirk.key.pem </span><br><span class="line"></span><br><span class="line">-cacert /home/software/es_ssl/es/config/certs/root-ca.pem </span><br><span class="line"></span><br><span class="line">-keypass changeit </span><br><span class="line"></span><br><span class="line">-nhnv </span><br><span class="line"></span><br><span class="line">-icl</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>（1）用jode</p>
+<ul>
+<li><p>去创建索引、删除索引</p>
+</li>
+<li><p>去查询除了<strong>humanresources</strong>索引之外的索引</p>
+</li>
+</ul>
+<p>（2）用cmaddock</p>
+<ul>
+<li><p>去创建索引、删除索引</p>
+</li>
+<li><p>去查询<em>infrastructure</em>索引、写入数据</p>
+</li>
+<li><p>去查询<em>log</em>开头的索引、写入</p>
+</li>
+<li><p>查询、写入其他索引</p>
+</li>
+</ul>
+<h4 id="jode操作"><a href="#jode操作" class="headerlink" title="jode操作"></a>jode操作</h4><h5 id="创建索引-1"><a href="#创建索引-1" class="headerlink" title="创建索引"></a>创建索引</h5><p><img src="http://img.yangjiapo.cn/ElasticSearcch/jode%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95.png" alt></p>
+<p>返回来的异常信息，为admin才能创建索引，失败了。</p>
+<h5 id="创建文档"><a href="#创建文档" class="headerlink" title="创建文档"></a>创建文档</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">​    "username":"张三",</span><br><span class="line"></span><br><span class="line">​    "age":18,</span><br><span class="line"></span><br><span class="line">​    "gender":"male"</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/jode%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3.png" alt></p>
+<p>以经用admin创建了*<font color="red">humanresources</font><em>索引，现在用jode用户去写入数据，明显无权限，由于</em>jode<em>属于</em>hr_department<em>角色，只能有查询*</em>humanresources**的权限</p>
+<h5 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h5><p>查询<em>humanresources</em>索引，能查询出数据。</p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/jode%E6%9F%A5%E8%AF%A2humanresources.png" alt></p>
+<p>我现在用<strong>jode</strong>用户，查询<em>infrastructure</em>索引，显示无权限。</p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/jode%E6%9F%A5%E8%AF%A2%E5%85%B6%E4%BB%96%E7%B4%A2%E5%BC%95-%E6%97%A0%E6%9D%83%E9%99%90.png" alt></p>
+<h3 id="cmaddock操作"><a href="#cmaddock操作" class="headerlink" title="cmaddock操作"></a>cmaddock操作</h3><p><em>cmaddock</em>是<strong>devops</strong>角色的用户，有两个索引，其中<em>infrasturcture</em>可以读和写的权限，<em>logs-*</em>只可以读</p>
+<h4 id="创建索引-2"><a href="#创建索引-2" class="headerlink" title="创建索引"></a>创建索引</h4><p><img src="http://img.yangjiapo.cn/ElasticSearcch/devops%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95.png" alt></p>
+<p>显然是无权限，正确。</p>
+<h4 id="创建文档-1"><a href="#创建文档-1" class="headerlink" title="创建文档"></a>创建文档</h4><p><img src="http://img.yangjiapo.cn/ElasticSearcch/infrastructure%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3.png" alt></p>
+<p>显示成功，正确</p>
+<p>对于logs-*索引，无写权限，如下：</p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/devops%E6%97%A0%E5%86%99%E6%9D%83%E9%99%90.png" alt></p>
+<h4 id="查询索引-1"><a href="#查询索引-1" class="headerlink" title="查询索引"></a>查询索引</h4><h5 id="infrastructure索引"><a href="#infrastructure索引" class="headerlink" title="infrastructure索引"></a>infrastructure索引</h5><p><img src="http://img.yangjiapo.cn/ElasticSearcch/infrastructure%E6%9F%A5%E8%AF%A2%E7%B4%A2%E5%BC%95.png" alt></p>
+<p>显示数据，成功。</p>
+<h5 id="logs-索引"><a href="#logs-索引" class="headerlink" title="logs-*索引"></a>logs-*索引</h5><p>我创建了<strong>logs-2023</strong>、<strong>log-2023</strong>两个索引。</p>
+<p>查询<strong>log-2023</strong></p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/devops%E6%9F%A5%E8%AF%A2log%E7%B4%A2%E5%BC%95.png" alt></p>
+<p>显示无权限，正确，由于对于<strong>logs-*</strong>正则表达式的索引，才能查询。</p>
+<p>查询<strong>logs-2023</strong></p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/devops%E6%9F%A5%E8%AF%A2logs%E6%97%A5%E5%BF%97.png" alt></p>
+<p>显示数据，成功</p>
 
         </div>
         
@@ -242,16 +259,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/10/05/b846387f.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2023/03/06/efa6925a.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Redis的分布式锁</span>
+                <span class="level-item">2023找工作记</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/09/05/dfc98018.html">
-                <span class="level-item">CentOs7安装Rabbitmq</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2021/03/05/64a068f6.html">
+                <span class="level-item">DynamicSource动态数据源</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -267,8 +284,8 @@ var _hmt = _hmt || [];
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://choleen95.github.io/2020/09/05/3b63363d.html';
-        this.page.identifier = '2020/09/05/3b63363d.html';
+        this.page.url = 'http://choleen95.github.io/2023/03/06/efa6925a.html';
+        this.page.identifier = '2023/03/06/efa6925a.html';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -1015,7 +1032,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/gen.svg" alt="CentOs7安装Redis5.0.7" height="28">
+                    <img src="/images/gen.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户" height="28">
                 
                 </a>
                 <p class="is-size-7">
