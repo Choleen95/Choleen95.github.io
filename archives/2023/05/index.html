@@ -7,19 +7,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>去除ES云服务器恶意命令 - 山沉</title>
+<title>归档: 2023/5 - 山沉</title>
 
 
-    <meta name="description" content="云服务出现占用CPU-90%的恶意命令云服务提供的信息">
-<meta property="og:type" content="article">
-<meta property="og:title" content="去除ES云服务器恶意命令">
-<meta property="og:url" content="http://choleen95.github.io/2020/09/05/76531017.html">
+    <meta name="description" content="learn to something">
+<meta property="og:type" content="website">
+<meta property="og:title" content="山沉">
+<meta property="og:url" content="http://choleen95.github.io/archives/2023/05/index.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="云服务出现占用CPU-90%的恶意命令云服务提供的信息">
+<meta property="og:description" content="learn to something">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-09-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-05T17:29:44.090Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -89,7 +87,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/gen.svg" alt="去除ES云服务器恶意命令" height="28">
+                <img src="/images/gen.svg" alt="山沉" height="28">
             
             </a>
         </div>
@@ -139,115 +137,34 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-04T16:00:00.000Z">2020-09-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 281 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                去除ES云服务器恶意命令
-            
-        </h1>
-        <div class="content">
-            <h2 id="云服务出现占用CPU-90-的恶意命令"><a href="#云服务出现占用CPU-90-的恶意命令" class="headerlink" title="云服务出现占用CPU-90%的恶意命令"></a>云服务出现占用CPU-90%的恶意命令</h2><h4 id="云服务提供的信息"><a href="#云服务提供的信息" class="headerlink" title="云服务提供的信息"></a>云服务提供的信息</h4><p><img src="http://img.yangjiapo.cn/phpupdate.png" alt="avator"></p>
-<a id="more"></a>
-<p>先查看进程，选择top命令，查看结果：</p>
-<p><img src="http://img.yangjiapo.cn/806_3.png" alt="avator"></p>
-<p>CPU占用率达到100%，且不是我执行的命令，果断找出执行路径。使用如下命令，通过 PID 获取对应文件的路径。然后，找到并删除对应的文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /proc/<span class="variable">$pid</span>/exe</span><br></pre></td></tr></table></figure>
 
-<p>这里的pid，我这里是14560。找到路径，删除命令或者文件。若存在恶意 minerd、tplink 进程，也查找出来删除。</p>
-<p><img src="http://img.yangjiapo.cn/806_1.png" alt="avator"></p>
-<p>下面用的命令是进行删除出现这个提示的命令或文件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cannot remove ‘phpupdate’: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p>可以使用以下命令去删除文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsattr 文件&#x2F;命令  --查看隐藏属性</span><br><span class="line">chattr 隐藏属性 文件&#x2F;命令</span><br><span class="line">rm -rf 文件&#x2F;命令  -- 重新执行删除</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/806_2.png" alt="avator"></p>
-<p>最后在重新查看，进程，是否有类似很高的进程，又不是你自己的。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/09/05/dfc98018.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">CentOs7安装Rabbitmq</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/08/05/a611db9a.html">
-                <span class="level-item">城市套路深，我想回农村</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
+<div class="card widget">
     <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        <h3 class="tag is-link">
+        五月 2023
+        </h3>
+        <div class="timeline">
         
-<script>
-    var disqus_config = function () {
-        this.page.url = 'http://choleen95.github.io/2020/09/05/76531017.html';
-        this.page.identifier = '2020/09/05/76531017.html';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + '不能为空' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2023-05-25T13:50:28.722Z">2023-05-25</time>
+                        <a href="/2023/05/25/68feec6c.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringCloud/Linux上nacos启动成功，但网页无法加载</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+        </div>
     </div>
 </div>
+
+
 </div>
                 
 
@@ -1001,7 +918,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/gen.svg" alt="去除ES云服务器恶意命令" height="28">
+                    <img src="/images/gen.svg" alt="山沉" height="28">
                 
                 </a>
                 <p class="is-size-7">
