@@ -144,170 +144,6 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2023-06-04T10:30:00.000Z">2023-06-04</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 311 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2023/06/04/c041f4c9.html">三、tienchin健身系统下的技术点复现--动态数据源</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="三、网页手动实现动态数据源切换"><a href="#三、网页手动实现动态数据源切换" class="headerlink" title="三、网页手动实现动态数据源切换"></a>三、网页手动实现动态数据源切换</h2><p>手动切换 数据源，采用HttpSession 保存数据源名称，在全局的切面定义service下所有方法，都会切换数据源。</p>
-<h3 id="1、定义一个html页面"><a href="#1、定义一个html页面" class="headerlink" title="1、定义一个html页面"></a>1、定义一个html页面</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>切换数据源<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"jquery-3.6.0.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  请选择数据源：</span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">onchange</span>=<span class="string">"dsChange(this.options[this.options.selectedIndex].value)"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"请选择"</span>&gt;</span>请选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"master"</span>&gt;</span>master<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"slave"</span>&gt;</span>slave<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"result"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"loadData()"</span>&gt;</span>加载数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">dsChange</span><span class="params">(value)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    $.post(<span class="string">"/dataType"</span>,&#123;<span class="attr">dataType</span>:value&#125;);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">loadData</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">    $.get(<span class="string">"/users"</span>,<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"#result"</span>).html(<span class="built_in">JSON</span>.stringify(data));</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2、定义一个全局切换数据源切面"><a href="#2、定义一个全局切换数据源切面" class="headerlink" title="2、定义一个全局切换数据源切面"></a>2、定义一个全局切换数据源切面</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">11</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalDynamicDataSourceAspect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(GlobalDynamicDataSourceAspect<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HttpSession httpSession;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* com.example.datasource_tienchin.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pc</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"pc()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">// 设置数据源</span></span><br><span class="line">        DynamicDataSourceContextHolder.setDatasourceType(</span><br><span class="line">                ((String) httpSession.getAttribute(DataSourceType.SESSION_KEY_TYPE)));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> pjp.proceed();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            throwable.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于DynamicAspec 的@Order(10) ，所以它先执行，最后生效的是全局切面。</p>
-<h3 id="3、请求接口"><a href="#3、请求接口" class="headerlink" title="3、请求接口"></a>3、请求接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicDataSourceController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(DynamicDataSourceController<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    LoginUserService loginUserService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/dataType"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeDataSource</span><span class="params">(String dataType, HttpSession session)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// session 中存储数据源名称</span></span><br><span class="line">        session.setAttribute(DataSourceType.SESSION_KEY_TYPE, dataType);</span><br><span class="line">        LOGGER.info(<span class="string">"前端切换数据源 &#123;&#125; 了"</span>, dataType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/users"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;LoginUser&gt; <span class="title">queryUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> loginUserService.getAllLoginUsers();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E7%BD%91%E9%A1%B5%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90.png" alt="网页切换数据源"></p>
-<p>当然，HttpSession可以存，其他方式也可以。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2023-06-04T01:49:00.000Z">2023-06-04</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 595 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2023/06/04/62c04a02.html">二、tienchin健身系统下的技术点复现--动态数据源</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="二、配置动态数据源"><a href="#二、配置动态数据源" class="headerlink" title="二、配置动态数据源"></a>二、配置动态数据源</h2><p>前面我们已经准备了基础的类，@DynamicDatasource、DruidProperties、DynamicAspect</p>
-<p>现在我们开始对 AbstractRoutingDatasource 所需要的数据源，放到对应的map结构中。</p>
-<h3 id="1、加载数据源"><a href="#1、加载数据源" class="headerlink" title="1、加载数据源"></a>1、加载数据源</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 加载自定义的数据源，存入到 Map&lt;String,Datasource&gt; 结构中</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/4 10:00]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(DruidProperties<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">LoadDataSource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DruidProperties druidProperties;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, DataSource&gt; <span class="title">loadDatasource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Map&lt;String, DataSource&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">// 获取自定义数据源的属性</span></span><br><span class="line">        Map&lt;String, Map&lt;String, String&gt;&gt; druidMap = druidProperties.getDruid();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 数据源名称 master、slave</span></span><br><span class="line">            Set&lt;String&gt; keySet = druidMap.keySet();</span><br><span class="line">            <span class="keyword">for</span> (String name : keySet) &#123;</span><br><span class="line">                map.put(name, druidProperties.dataSource(</span><br><span class="line">                        ((DruidDataSource) DruidDataSourceFactory.createDataSource(druidMap.get(name)))));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2、设置默认、目标数据源"><a href="#2、设置默认、目标数据源" class="headerlink" title="2、设置默认、目标数据源"></a>2、设置默认、目标数据源</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 重写AbstractRoutingDataSource 的一个方法</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/3 22:49]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicRoutingDataSource</span> <span class="keyword">extends</span> <span class="title">AbstractRoutingDataSource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DynamicRoutingDataSource</span><span class="params">(LoadDataSource loadDatasource)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, DataSource&gt; allDataSource = loadDatasource.loadDatasource();</span><br><span class="line">        <span class="comment">// 1.设置所有数据源</span></span><br><span class="line">        <span class="keyword">super</span>.setTargetDataSources(<span class="keyword">new</span> HashMap&lt;&gt;(allDataSource));</span><br><span class="line">        <span class="comment">// 2.设置默认的数据源</span></span><br><span class="line">        <span class="keyword">super</span>.setDefaultTargetDataSource(allDataSource.get(DataSourceType.DEFAULT_DS_TYPE));</span><br><span class="line">        <span class="comment">// 3.设置配置</span></span><br><span class="line">        <span class="keyword">super</span>.afterPropertiesSet();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该方法是用来返回数据源的名称，当系统需要获取数据源的时候，会自动调用该方法获取数据源的名称</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> 山沉</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2023/6/4 10:12</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> Object&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">determineCurrentLookupKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DynamicDataSourceContextHolder.getDatasourceType();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>到了这一步基本就设置完成，总的来说就是依据 AbstracRoutingDataSource 来存储 target 和 default 的数据源，重写 determineCurrentLookupKey 方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 常用配置变量</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/4 10:22]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DataSourceType</span> </span>&#123;</span><br><span class="line">    String DEFAULT_DS_TYPE = <span class="string">"master"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3、单元测试"><a href="#3、单元测试" class="headerlink" title="3、单元测试"></a>3、单元测试</h3><h4 id="3-0-创建service、mapper、domian"><a href="#3-0-创建service、mapper、domian" class="headerlink" title="3.0 创建service、mapper、domian"></a>3.0 创建service、mapper、domian</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginUserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LoginUserMapper loginUserMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;LoginUser&gt; <span class="title">getAllLoginUsers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> loginUserMapper.getAllLoginUsers();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginUser</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"LoginUser&#123;"</span> +</span><br><span class="line">                <span class="string">"id="</span> + id +</span><br><span class="line">                <span class="string">", name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LoginUserMapper</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查找所有的登录用户</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> 山沉</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2023/6/4 10:41</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> List&lt; LoginUser&gt;&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from t_login_user"</span>)</span><br><span class="line">    <span class="function">List&lt;LoginUser&gt; <span class="title">getAllLoginUsers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后看下数据库</p>
-<p>tesdb2、testdb 两个库中有相同的t_login_user表</p>
-<p>slave对应如下</p>
-<p><img src="http://img.yangjiapo.cn/ElasticSearcch/tesdb2.png" alt></p>
-<p>master对应如下</p>
-<p><img src="http://img.yangjiapo.cn/ElasticSearcch/testdb.png" alt></p>
-<h4 id="3-1-直接访问"><a href="#3-1-直接访问" class="headerlink" title="3.1 直接访问"></a>3.1 直接访问</h4><p>直接访问，不添加注解，是默认数据源</p>
-<p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E9%BB%98%E8%AE%A4%E6%95%B0%E6%8D%AE%E6%BA%90.png" alt="默认数据源"></p>
-<h4 id="3-2-加注解访问"><a href="#3-2-加注解访问" class="headerlink" title="3.2 加注解访问"></a>3.2 加注解访问</h4><p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E5%8A%A0%E6%B3%A8%E8%A7%A3%E8%AE%BF%E9%97%AE.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2023-06-03T16:21:00.000Z">2023-06-04</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1422 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2023/06/04/c6d204fe.html">一、tienchin健身系统下的技术点复现--动态数据源</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="一、tienchin健身系统下的技术点复现–动态数据源"><a href="#一、tienchin健身系统下的技术点复现–动态数据源" class="headerlink" title="一、tienchin健身系统下的技术点复现–动态数据源"></a>一、tienchin健身系统下的技术点复现–动态数据源</h2><p>自定义一个注解@DynamicDatasource，可以配置在方法或者类上面，标识方法或者类中的所有方法都使用某一个数据源。</p>
-<p>使用数据源是使用ThreadLocal获取数据源名称的，当然要先存入到ThreadLocal中</p>
-<p>自定义切面，使用环绕通知，拦截@DynamicDatasource注解的方法或者类中的所有方法的时候，将@DynamicDatasource注解所对应的数据源注入到ThreadLocal中。</p>
-<p>最后，当Mapper执行方法时，需要DataSource，它会自动去AbstracRoutingDatasource类中去查找目标数据源。我们只需要在重写的方法determineCurrentLookupKey方法中，返回ThreadLocal的值即可。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2023/06/04/c6d204fe.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2023-05-28T09:46:00.000Z">2023-05-28</time>
                 
                 <div class="level-item">
@@ -678,6 +514,168 @@ var _hmt = _hmt || [];
 
 
 
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-03-04T16:00:00.000Z">2021-03-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 64 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2021/03/05/efa6925a.html">安装elasticsearch的问题</a>
+            
+        </h1>
+        <div class="content">
+            <ul>
+<li><p>1.cannot assign requested address:bind</p>
+<p>安装elasticsearch5.5.2,配置了端口9200，让后启动。发生了这个错误；百度查询是绑定host出了问题。</p>
+<h6 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h6><p>[~#]vim elasticseach/config/elasticsearch.yml</p>
+<p>增加两行</p>
+<p>[~#]network.bind_host:127.0.0.1</p>
+<p>[~#]network.publish_host:127.0.0.1</p>
+<p>[~#]wq</p>
+<p>启动成功</p>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-11-04T16:00:00.000Z">2020-11-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 620 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/11/05/a3b4f1bf.html">itextpdf导出数据</a>
+            
+        </h1>
+        <div class="content">
+            <p>这是一个导出数据为pdf的demo。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/05/a3b4f1bf.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-04T16:00:00.000Z">2020-10-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Novel/">Novel</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 661 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/05/5fa600f2.html">微风拂面，杨柳倒垂</a>
+            
+        </h1>
+        <div class="content">
+            <p>​    位于西南方向的皮德堡虹吸湾，这里背靠老鹰崖，前方是一片丛山峻岭，向下有一条小路蜿蜒进入，不是常年居住在附近的山民，也许走不到这里。我们的故事也是从这里开始的，也许这是一个梦，也许也是生活的缩影，谁又能说明白这些呢？</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/10/05/5fa600f2.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -695,8 +693,6 @@ var _hmt = _hmt || [];
             <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
         </ul>
     </nav>
@@ -746,7 +742,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            30
                         </p>
                     </a>
                 </div>
@@ -932,7 +928,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a>
+        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a>
     </div>
 </div>
     
@@ -944,63 +940,6 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2023/06/04/c041f4c9.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="三、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-04T10:30:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/c041f4c9.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">三、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/06/04/62c04a02.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="二、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-04T01:49:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/62c04a02.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">二、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/06/04/c6d204fe.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-03T16:21:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/c6d204fe.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1040,6 +979,63 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2023/03/07/1ce21b5d.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="收集的计算机基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-07T05:10:54.000Z">2023-03-07</time></div>
+                    <a href="/2023/03/07/1ce21b5d.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">收集的计算机基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E4%BA%BA%E7%94%9F/">人生</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/03/06/efa6925a.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2023找工作记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
+                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2023找工作记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/03/06/efa6925a.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
+                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">ElasticSearch7.10配置Search-Guard之配置用户</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
         
@@ -1050,17 +1046,6 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2023/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2023</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2023/05/">
@@ -1184,7 +1169,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/SpringBoot/">
                         <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1219,63 +1204,6 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
-            <a href="/2023/06/04/c041f4c9.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="三、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-04T10:30:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/c041f4c9.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">三、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/06/04/62c04a02.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="二、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-04T01:49:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/62c04a02.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">二、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/06/04/c6d204fe.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一、tienchin健身系统下的技术点复现--动态数据源">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-03T16:21:00.000Z">2023-06-04</time></div>
-                    <a href="/2023/06/04/c6d204fe.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一、tienchin健身系统下的技术点复现--动态数据源</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2023/05/28/5e5d6ed4.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="springboot配置Swagger3.0">
@@ -1312,6 +1240,63 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2023/03/07/1ce21b5d.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="收集的计算机基础">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-07T05:10:54.000Z">2023-03-07</time></div>
+                    <a href="/2023/03/07/1ce21b5d.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">收集的计算机基础</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E4%BA%BA%E7%94%9F/">人生</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/03/06/efa6925a.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2023找工作记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
+                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2023找工作记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/03/06/efa6925a.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
+                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">ElasticSearch7.10配置Search-Guard之配置用户</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
     
@@ -1322,17 +1307,6 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2023/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2023</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2023/05/">
@@ -1456,7 +1430,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/SpringBoot/">
                         <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
