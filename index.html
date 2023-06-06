@@ -144,6 +144,142 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2023-06-06T14:03:00.000Z">2023-06-06</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1074 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2023/06/06/62ecbe6c.html">二、tienchin健身系统技术点复现-注解限流</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="二、tienchin健身系统技术点复现-注解限流"><a href="#二、tienchin健身系统技术点复现-注解限流" class="headerlink" title="二、tienchin健身系统技术点复现-注解限流"></a>二、tienchin健身系统技术点复现-注解限流</h2><p>在上一章节写到编写 lua 脚本。基本的配置类都已经创建，下面创建一个 请求获取IP的工具类和全局异常处理即可。</p>
+<h3 id="1、创建工具类IpUtils"><a href="#1、创建工具类IpUtils" class="headerlink" title="1、创建工具类IpUtils"></a>1、创建工具类IpUtils</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yangjiapo.rate_limiter.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取IP方法</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> tienchin</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IpUtils</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取客户端IP</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request 请求对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> IP地址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (request == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"unknown"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String ip = request.getHeader(<span class="string">"x-forwarded-for"</span>);</span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">            ip = request.getHeader(<span class="string">"Proxy-Client-IP"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">            ip = request.getHeader(<span class="string">"X-Forwarded-For"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">            ip = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">            ip = request.getHeader(<span class="string">"X-Real-IP"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">            ip = request.getRemoteAddr();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"0:0:0:0:0:0:0:1"</span>.equals(ip) ? <span class="string">"127.0.0.1"</span> : getMultistageReverseProxyIp(ip);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查是否为内部IP地址</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ip IP地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">internalIp</span><span class="params">(String ip)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] addr = textToNumericFormatV4(ip);</span><br><span class="line">        <span class="keyword">return</span> internalIp(addr) || <span class="string">"127.0.0.1"</span>.equals(ip);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查是否为内部IP地址</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> addr byte地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">internalIp</span><span class="params">(<span class="keyword">byte</span>[] addr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (addr == <span class="keyword">null</span> || addr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> b0 = addr[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> b1 = addr[<span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 10.x.x.x/8</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_1 = <span class="number">0x0A</span>;</span><br><span class="line">        <span class="comment">// 172.16.x.x/12</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_2 = (<span class="keyword">byte</span>) <span class="number">0xAC</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_3 = (<span class="keyword">byte</span>) <span class="number">0x10</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_4 = (<span class="keyword">byte</span>) <span class="number">0x1F</span>;</span><br><span class="line">        <span class="comment">// 192.168.x.x/16</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_5 = (<span class="keyword">byte</span>) <span class="number">0xC0</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span> SECTION_6 = (<span class="keyword">byte</span>) <span class="number">0xA8</span>;</span><br><span class="line">        <span class="keyword">switch</span> (b0) &#123;</span><br><span class="line">            <span class="keyword">case</span> SECTION_1:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">case</span> SECTION_2:</span><br><span class="line">                <span class="keyword">if</span> (b1 &gt;= SECTION_3 &amp;&amp; b1 &lt;= SECTION_4) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">case</span> SECTION_5:</span><br><span class="line">                <span class="keyword">switch</span> (b1) &#123;</span><br><span class="line">                    <span class="keyword">case</span> SECTION_6:</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将IPv4地址转换成字节</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> text IPv4地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> byte 字节</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] textToNumericFormatV4(String text) &#123;</span><br><span class="line">        <span class="keyword">if</span> (text.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</span><br><span class="line">        String[] elements = text.split(<span class="string">"\\."</span>, -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">long</span> l;</span><br><span class="line">            <span class="keyword">int</span> i;</span><br><span class="line">            <span class="keyword">switch</span> (elements.length) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                    l = Long.parseLong(elements[<span class="number">0</span>]);</span><br><span class="line">                    <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">4294967295L</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    bytes[<span class="number">0</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &gt;&gt; <span class="number">24</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">1</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) ((l &amp; <span class="number">0xFFFFFF</span>) &gt;&gt; <span class="number">16</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">2</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) ((l &amp; <span class="number">0xFFFF</span>) &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">3</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                    l = Integer.parseInt(elements[<span class="number">0</span>]);</span><br><span class="line">                    <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">255L</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    bytes[<span class="number">0</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    l = Integer.parseInt(elements[<span class="number">1</span>]);</span><br><span class="line">                    <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">16777215L</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    bytes[<span class="number">1</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &gt;&gt; <span class="number">16</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">2</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) ((l &amp; <span class="number">0xFFFF</span>) &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">3</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ++i) &#123;</span><br><span class="line">                        l = Integer.parseInt(elements[i]);</span><br><span class="line">                        <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">255L</span>)) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        bytes[i] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    l = Integer.parseInt(elements[<span class="number">2</span>]);</span><br><span class="line">                    <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">65535L</span>)) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    bytes[<span class="number">2</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    bytes[<span class="number">3</span>] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">                        l = Integer.parseInt(elements[i]);</span><br><span class="line">                        <span class="keyword">if</span> ((l &lt; <span class="number">0L</span>) || (l &gt; <span class="number">255L</span>)) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        bytes[i] = (<span class="keyword">byte</span>) (<span class="keyword">int</span>) (l &amp; <span class="number">0xFF</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bytes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取IP地址</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 本地IP地址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getHostIp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> InetAddress.getLocalHost().getHostAddress();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取主机名</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 本地主机名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getHostName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> InetAddress.getLocalHost().getHostName();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"未知"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从多级反向代理中获得第一个非unknown IP地址</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ip 获得的IP地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 第一个非unknown IP地址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMultistageReverseProxyIp</span><span class="params">(String ip)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 多级反向代理检测</span></span><br><span class="line">        <span class="keyword">if</span> (ip != <span class="keyword">null</span> &amp;&amp; ip.indexOf(<span class="string">","</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">final</span> String[] ips = ip.trim().split(<span class="string">","</span>);</span><br><span class="line">            <span class="keyword">for</span> (String subIp : ips) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">false</span> == isUnknown(subIp)) &#123;</span><br><span class="line">                    ip = subIp;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检测给定字符串是否为未知，多用于检测HTTP请求相关</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> checkString 被检测的字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 是否未知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isUnknown</span><span class="params">(String checkString)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> checkString == <span class="keyword">null</span> || checkString.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(checkString);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于每个从前端的请求，我们都可以获取Servlet，比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpServletRequest request = (HttpServletRequest)(RequestContextHolder.getRequestArributes()).getRequest();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、创建全局异常处理类"><a href="#2、创建全局异常处理类" class="headerlink" title="2、创建全局异常处理类"></a>2、创建全局异常处理类</h3><p>对于 @RateLimiter 注解 拦截产生的异常，应该有个自定义异常。然后再全局异常处理中把数据抛给前端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RateLimitException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RateLimitException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 全局的异常处理</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/6 0:09]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalException</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(RateLimitException<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">Map</span>&lt;<span class="title">Object</span>, <span class="title">Object</span>&gt; <span class="title">rateLimitException</span>(<span class="title">RateLimitException</span> <span class="title">rateLimitException</span>) </span>&#123;</span><br><span class="line">        Map&lt;Object, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"status"</span>, <span class="number">500</span>);</span><br><span class="line">        map.put(<span class="string">"msg"</span>, rateLimitException.getMessage());</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、测试是否拦截成功"><a href="#3、测试是否拦截成功" class="headerlink" title="3、测试是否拦截成功"></a>3、测试是否拦截成功</h3><p>创建一个 HelloController类，定义一个 <strong>/hello</strong> 接口。</p>
+<p>在方法上定义一个注解 @RateLimiter(time=10,count=3,limitType=LimitType.IP)  10秒内请求超过3次即限制请求后台，采用</p>
+<p><strong>rate_limiter:192.168.246.214:com.yangjiapo.rate_limiter.controller.HelloController.hello</strong> 形式的key组成方式，此处 LimitType.IP</p>
+<p>即是否构建IP到 key 中。在 切面拦截前置通知中 判断。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RateLimiter</span>(count = <span class="number">3</span>, time = <span class="number">10</span>, limitType = LimitType.IP)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、设置PostMan-循环请求"><a href="#4、设置PostMan-循环请求" class="headerlink" title="4、设置PostMan 循环请求"></a>4、设置PostMan 循环请求</h3><p><img src="http://img.yangjiapo.cn/ElasticSearcch/rateLimiter-postMna%E6%B5%8B%E8%AF%95%E9%99%90%E6%B5%81.png" alt></p>
+<p>还差一步，就是把左边请求拖到右边 RUN ORDER</p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/postMan%E6%B5%8B%E8%AF%952.png" alt></p>
+<p>点击开始，如下为控制台输出</p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="http://img.yangjiapo.cn/ElasticSearcch/%E9%99%90%E6%B5%81key%E5%80%BC.png" alt></p>
+<p>成功</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2023-06-05T16:00:00.000Z">2023-06-06</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1049 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2023/06/06/1b9ac471.html">一、tienchin健身系统技术点复现-注解限流</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="一、tienchin健身系统技术点复现-注解限流"><a href="#一、tienchin健身系统技术点复现-注解限流" class="headerlink" title="一、tienchin健身系统技术点复现-注解限流"></a>一、tienchin健身系统技术点复现-注解限流</h2><p>这个技术用到的点是 用Java代码执行 redis 的 lua 脚本，采用 请求接口方法 注解@RateLimiter ，前置通知拦截判断请求次数，做出限流操作。</p>
+<p><a href="https://gitee.com/Choleen95/tien-chin-demo.git">Gitee代码仓库-rate-limiter</a></p>
+<h3 id="1、application-yml-配置-redis参数"><a href="#1、application-yml-配置-redis参数" class="headerlink" title="1、application.yml 配置 redis参数"></a>1、application.yml 配置 redis参数</h3><p>在 application.yml 中配置redis基本的参数</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.redis.host</span>=<span class="string">127.0.0.1</span></span><br><span class="line"><span class="meta">spring.redis.password</span>=<span class="string">choleen</span></span><br><span class="line"><span class="meta">spring.redis.port</span>=<span class="string">6379</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、配置-Redis-序列化key-value"><a href="#2、配置-Redis-序列化key-value" class="headerlink" title="2、配置 Redis 序列化key-value"></a>2、配置 Redis 序列化key-value</h3><p>对于 redis 存储或取出时，不配置用的是JDK的序列化，在redis中存储的key和value会有一些其他的东西在前面，比如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name:张三</span><br><span class="line">jdk---&gt; \dsff\dsfg\dfdfname:\dfds\dfds\ggds张三</span><br></pre></td></tr></table></figure>
+
+<p>这种可以用 RedisTemplate 去调用 get(key)，但是用命令行就不行了，在后面用 lua 表达式时，也相当于使用命令行，所以需要我们重新设置序列化</p>
+<p>创建一个RedisConfig类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 配置redis 的序列化</span></span><br><span class="line"><span class="comment"> *  配置lua脚本加载</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/5 23:11]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">RedisTemplate&lt;Object, Object&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory connectionFactory)</span> </span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; redisTemplate = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">        <span class="comment">// 定义序列化方式,默认JDK序列化，它会：/dd23/f45/443name:xxxx 这种形式</span></span><br><span class="line">        Jackson2JsonRedisSerializer&lt;Object&gt; serializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Object<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        redisTemplate.setKeySerializer(serializer);</span><br><span class="line">        redisTemplate.setValueSerializer(serializer);</span><br><span class="line">        <span class="comment">// hash类型的序列化也设置一下</span></span><br><span class="line">        redisTemplate.setHashKeySerializer(serializer);</span><br><span class="line">        redisTemplate.setHashValueSerializer(serializer);</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">DefaultRedisScript&lt;Long&gt; <span class="title">limitScript</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//加载lua脚本</span></span><br><span class="line">        DefaultRedisScript&lt;Long&gt; script = <span class="keyword">new</span> DefaultRedisScript&lt;&gt;();</span><br><span class="line">        script.setResultType(Long<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        script.setScriptSource(<span class="keyword">new</span> ResourceScriptSource(<span class="keyword">new</span> ClassPathResource(<span class="string">"lua/RateLimiter.lua"</span>)));</span><br><span class="line">        <span class="keyword">return</span> script;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、创建-RateLimiter注解"><a href="#3、创建-RateLimiter注解" class="headerlink" title="3、创建@RateLimiter注解"></a>3、创建@RateLimiter注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 限制接口访问次数的注解-搭配切面使用</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 山沉</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2023/6/5 23:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RateLimiter &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 限流key，即redis中存入的key前缀 rate_limiter:192.168.246.130:com.yangjiapo.rate_limiter.controller.HelloController.hello</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">key</span><span class="params">()</span> <span class="keyword">default</span> "rate_limier:"</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 限流次数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> <span class="keyword">default</span> 100</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 限流时间，即60秒内大于100就限制</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">time</span><span class="params">()</span> <span class="keyword">default</span> 60</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 限流类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">LimitType <span class="title">limitType</span><span class="params">()</span> <span class="keyword">default</span> LimitType.DEFAULT</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建LimitType 限流类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> LimitType &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *根据请求者Ip进行限流</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    IP,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 默认策略全局限流</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    DEFAULT</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、定义切面RateLimiterAspectj"><a href="#4、定义切面RateLimiterAspectj" class="headerlink" title="4、定义切面RateLimiterAspectj"></a>4、定义切面RateLimiterAspectj</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RateLimterAspectj</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RateLimterAspectj<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;Object, Object&gt; redisTemplate;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DefaultRedisScript&lt;Long&gt; redisScript;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"@annotation(rateLimiter)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(JoinPoint jp, RateLimiter rateLimiter)</span> <span class="keyword">throws</span> RateLimitException </span>&#123;</span><br><span class="line">        <span class="comment">// 拼接 redis 的key</span></span><br><span class="line">        String key = getCombineKey(jp, rateLimiter);</span><br><span class="line">        <span class="keyword">int</span> count = rateLimiter.count();</span><br><span class="line">        <span class="keyword">int</span> time = rateLimiter.time();</span><br><span class="line">        <span class="comment">// redis 执行lua脚本</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Long number = redisTemplate</span><br><span class="line">                    .execute(redisScript, Collections.singletonList(key), time, count);</span><br><span class="line">            <span class="keyword">if</span> (number == <span class="keyword">null</span> || number.intValue() &gt; count) &#123;</span><br><span class="line">                <span class="comment">// 超过限流阈值</span></span><br><span class="line">                LOGGER.info(<span class="string">"当前接口已达到最大限流次数"</span>);</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RateLimitException(<span class="string">"访问过于频繁，请稍后访问!"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            LOGGER.info(<span class="string">"一个时间窗内请求次数：&#123;&#125;, 当前请求次数：&#123;&#125;，缓存的key为：&#123;&#125;"</span>, count, number, key);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这个方法就是获取 redis 存储的接口调用次数的key</span></span><br><span class="line"><span class="comment">     * rate_limiter:192.168.130.221-com.yangjiapo.rate_limiter.controller.HelloController.hello</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jp 参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rateLimiter 注解</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2023/6/5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getCombineKey</span><span class="params">(JoinPoint jp, RateLimiter rateLimiter)</span> </span>&#123;</span><br><span class="line">        MethodSignature signature = (MethodSignature) jp.getSignature();</span><br><span class="line">        StringBuffer buffer = <span class="keyword">new</span> StringBuffer(rateLimiter.key());</span><br><span class="line">        <span class="keyword">if</span> (LimitType.IP == rateLimiter.limitType()) &#123;</span><br><span class="line">            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder</span><br><span class="line">                    .getRequestAttributes()).getRequest();</span><br><span class="line">            <span class="comment">// 获取IP</span></span><br><span class="line">            buffer.append(IpUtils.getIpAddr(request)).append(<span class="string">"-"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        String methodName = signature.getMethod().getName();</span><br><span class="line">        Method method = signature.getMethod();</span><br><span class="line">        String classRouting = method.getDeclaringClass().getName();</span><br><span class="line">        buffer.append(classRouting).append(<span class="string">"-"</span>).append(methodName);</span><br><span class="line">        <span class="keyword">return</span> buffer.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里用到的 RedisTemplate、DefaultRedisScript 都在 RedisConfig 配置类中初始化了。</p>
+<p>由于现在 Idea 智能了许多，大家在创建 切面时，容易创建为 aspect  类，这种就要根据它的要求写切点、通知等，若已经创建了 aspect，但想用 class 方式，即把此类删掉重新创建即可。</p>
+<h3 id="5、创建RateLimiter-lua脚本"><a href="#5、创建RateLimiter-lua脚本" class="headerlink" title="5、创建RateLimiter.lua脚本"></a>5、创建RateLimiter.lua脚本</h3><p>在 Resources 目录下，创建 lua 目录，然后创建 RateLimiter.lua 脚本。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">local key = KEYS[<span class="number">1</span>]</span><br><span class="line">local time = tonumber(ARGV[<span class="number">1</span>])</span><br><span class="line">local count = tonumber(ARGV[<span class="number">2</span>])</span><br><span class="line">local current = redis.call(<span class="string">'get'</span>, key)</span><br><span class="line"><span class="function"><span class="keyword">if</span> current and <span class="title">tonumber</span><span class="params">(current)</span> &gt; count then</span></span><br><span class="line"><span class="function">    return <span class="title">tonumber</span><span class="params">(current)</span></span>;</span><br><span class="line">end</span><br><span class="line">current = redis.call(<span class="string">'incr'</span>, key)</span><br><span class="line"><span class="function"><span class="keyword">if</span> <span class="title">tonumber</span><span class="params">(current)</span> </span>== <span class="number">1</span> then</span><br><span class="line">    redis.call(<span class="string">'expire'</span>, key, time)</span><br><span class="line">end</span><br><span class="line"><span class="keyword">return</span> tonumber(current)</span><br></pre></td></tr></table></figure>
+
+<p>这里是 定义了三个参数：redis的key，过期时间 time，单位时间内限流次数 count</p>
+<p>流程：</p>
+<ul>
+<li>当 current 存在，且大于 count 时，即返回当前从redis中获取的 value 值，即第几次请求。</li>
+<li>若 current 小于 count 则 使用 redis 的自增 1</li>
+<li>若 当前是第一次请求，则给一个redis的过期时间 time</li>
+<li>最后返回当前请求次数 current</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2023-05-28T09:46:00.000Z">2023-05-28</time>
                 
                 <div class="level-item">
@@ -570,112 +706,6 @@ var _hmt = _hmt || [];
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-04T16:00:00.000Z">2020-11-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 620 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/11/05/a3b4f1bf.html">itextpdf导出数据</a>
-            
-        </h1>
-        <div class="content">
-            <p>这是一个导出数据为pdf的demo。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/11/05/a3b4f1bf.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-10-04T16:00:00.000Z">2020-10-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Novel/">Novel</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 661 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/10/05/5fa600f2.html">微风拂面，杨柳倒垂</a>
-            
-        </h1>
-        <div class="content">
-            <p>​    位于西南方向的皮德堡虹吸湾，这里背靠老鹰崖，前方是一片丛山峻岭，向下有一条小路蜿蜒进入，不是常年居住在附近的山民，也许走不到这里。我们的故事也是从这里开始的，也许这是一个梦，也许也是生活的缩影，谁又能说明白这些呢？</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/10/05/5fa600f2.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -693,6 +723,8 @@ var _hmt = _hmt || [];
             <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
         </ul>
     </nav>
@@ -742,7 +774,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            30
+                            32
                         </p>
                     </a>
                 </div>
@@ -928,7 +960,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a>
+        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a>
     </div>
 </div>
     
@@ -940,6 +972,44 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2023/06/06/62ecbe6c.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="二、tienchin健身系统技术点复现-注解限流">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-06T14:03:00.000Z">2023-06-06</time></div>
+                    <a href="/2023/06/06/62ecbe6c.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">二、tienchin健身系统技术点复现-注解限流</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/06/06/1b9ac471.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一、tienchin健身系统技术点复现-注解限流">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-05T16:00:00.000Z">2023-06-06</time></div>
+                    <a href="/2023/06/06/1b9ac471.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一、tienchin健身系统技术点复现-注解限流</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -998,44 +1068,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2023/03/06/efa6925a.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2023找工作记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
-                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2023找工作记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/03/06/efa6925a.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
-                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">ElasticSearch7.10配置Search-Guard之配置用户</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1046,6 +1078,17 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2023/05/">
@@ -1169,7 +1212,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/SpringBoot/">
                         <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1204,6 +1247,44 @@ var _hmt = _hmt || [];
         
         <article class="media">
             
+            <a href="/2023/06/06/62ecbe6c.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="二、tienchin健身系统技术点复现-注解限流">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-06T14:03:00.000Z">2023-06-06</time></div>
+                    <a href="/2023/06/06/62ecbe6c.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">二、tienchin健身系统技术点复现-注解限流</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2023/06/06/1b9ac471.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="一、tienchin健身系统技术点复现-注解限流">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-06-05T16:00:00.000Z">2023-06-06</time></div>
+                    <a href="/2023/06/06/1b9ac471.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一、tienchin健身系统技术点复现-注解限流</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2023/05/28/5e5d6ed4.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="springboot配置Swagger3.0">
@@ -1259,44 +1340,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2023/03/06/efa6925a.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2023找工作记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
-                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2023找工作记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Life/">Life</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2023/03/06/efa6925a.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ElasticSearch7.10配置Search-Guard之配置用户">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-03-05T16:00:00.000Z">2023-03-06</time></div>
-                    <a href="/2023/03/06/efa6925a.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">ElasticSearch7.10配置Search-Guard之配置用户</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Elastic/">Elastic</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1307,6 +1350,17 @@ var _hmt = _hmt || [];
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2023/05/">
@@ -1430,7 +1484,7 @@ var _hmt = _hmt || [];
                 <div class="control">
                     <a class="tags has-addons" href="/tags/SpringBoot/">
                         <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
