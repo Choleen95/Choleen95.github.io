@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
 <meta property="article:published_time" content="2023-06-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-06T14:39:04.971Z">
+<meta property="article:modified_time" content="2023-06-06T14:50:05.217Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -151,7 +151,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1049 个字)
+                    7 分钟 读完 (大约 1050 个字)
                 </span>
                 
                 
@@ -175,6 +175,8 @@ var _hmt = _hmt || [];
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.redis.host</span>=<span class="string">127.0.0.1</span></span><br><span class="line"><span class="meta">spring.redis.password</span>=<span class="string">choleen</span></span><br><span class="line"><span class="meta">spring.redis.port</span>=<span class="string">6379</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="2、配置-Redis-序列化key-value"><a href="#2、配置-Redis-序列化key-value" class="headerlink" title="2、配置 Redis 序列化key-value"></a>2、配置 Redis 序列化key-value</h3><p>对于 redis 存储或取出时，不配置用的是JDK的序列化，在redis中存储的key和value会有一些其他的东西在前面，比如</p>
+<a id="more"></a>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name:张三</span><br><span class="line">jdk---&gt; \dsff\dsfg\dfdfname:\dfds\dfds\ggds张三</span><br></pre></td></tr></table></figure>
 
 <p>这种可以用 RedisTemplate 去调用 get(key)，但是用命令行就不行了，在后面用 lua 表达式时，也相当于使用命令行，所以需要我们重新设置序列化</p>
