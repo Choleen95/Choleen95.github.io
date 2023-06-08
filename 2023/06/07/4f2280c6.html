@@ -7,21 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>springboot的java打印票据 - 山沉</title>
+<title>一、tienchin健身系统技术点复现--注解重复提交 - 山沉</title>
 
 
-    <meta name="description" content="Java打印的几个步骤 1构建springboot框架 2引入log日志 3构建java打印xml文件 4解析xml配置文件 5java打印">
+    <meta name="description" content="一、tienchin健身系统技术点复现–注解重复提交对于开发系统中，我们很多时候，会有很多方法  Token机制  首先客户端请求服务端，获取一个 token，每一次请求都获取到一个全新的token，将token存入到redis中，然后将token返回给客户端。 客户端将来携带刚刚返回的token去请求一个接口。 服务端收到请求后，分为两种情况： 如果 token 在 redis 中，直接删除该">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot的java打印票据">
-<meta property="og:url" content="http://choleen95.github.io/2020/03/25/f4f56a79.html">
+<meta property="og:title" content="一、tienchin健身系统技术点复现--注解重复提交">
+<meta property="og:url" content="http://choleen95.github.io/2023/06/07/4f2280c6.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="Java打印的几个步骤 1构建springboot框架 2引入log日志 3构建java打印xml文件 4解析xml配置文件 5java打印">
+<meta property="og:description" content="一、tienchin健身系统技术点复现–注解重复提交对于开发系统中，我们很多时候，会有很多方法  Token机制  首先客户端请求服务端，获取一个 token，每一次请求都获取到一个全新的token，将token存入到redis中，然后将token返回给客户端。 客户端将来携带刚刚返回的token去请求一个接口。 服务端收到请求后，分为两种情况： 如果 token 在 redis 中，直接删除该">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-03-25T14:43:00.000Z">
-<meta property="article:modified_time" content="2021-03-05T17:29:44.122Z">
+<meta property="article:published_time" content="2023-06-07T14:13:00.000Z">
+<meta property="article:modified_time" content="2023-06-08T14:54:05.845Z">
 <meta property="article:author" content="山沉">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Filter">
+<meta property="article:tag" content="装饰者模式">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://choleen95.github.io/images/og_image.png">
 
@@ -89,7 +91,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/gen.svg" alt="springboot的java打印票据" height="28">
+                <img src="/images/gen.svg" alt="一、tienchin健身系统技术点复现--注解重复提交" height="28">
             
             </a>
         </div>
@@ -145,17 +147,13 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-25T14:43:00.000Z">2020-03-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2023-06-07T14:13:00.000Z">2023-06-07</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 822 个字)
+                    11 分钟 读完 (大约 1611 个字)
                 </span>
                 
                 
@@ -169,154 +167,94 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                springboot的java打印票据
+                一、tienchin健身系统技术点复现--注解重复提交
             
         </h1>
         <div class="content">
-            <h3 id="Java打印的几个步骤"><a href="#Java打印的几个步骤" class="headerlink" title="Java打印的几个步骤"></a><strong>Java打印的几个步骤</strong></h3><ul>
-<li>1构建springboot框架</li>
-<li>2引入log日志</li>
-<li>3构建java打印xml文件</li>
-<li>4解析xml配置文件</li>
-<li>5java打印<a id="more"></a>
-由于需要，现在要实现一个java打印的程序。我们开始第一步构建springboot项目。    <h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a><strong>第一步</strong></h4>打开idea，new 一个Project，选择Spring initializr 初始化一个springboot项目。在pom文件中按下alt + insert 选择Dependency使用idea的引入maven依赖。如下：   <pre><code class="angular2html">    &lt;!--基础依赖--&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;!--httpClient连接--&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
-        &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;!--gogle的Zxing生成二维码--&gt;
-    &lt;!-- https://mvnrepository.com/artifact/com.google.zxing/core --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
-        &lt;artifactId&gt;core&lt;/artifactId&gt;
-        &lt;version&gt;3.3.3&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;!-- https://mvnrepository.com/artifact/com.google.zxing/javase --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
-        &lt;artifactId&gt;javase&lt;/artifactId&gt;
-        &lt;version&gt;3.3.3&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;!--判断非空等的工具依赖--&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;me.javy&lt;/groupId&gt;
-        &lt;artifactId&gt;javy-helper&lt;/artifactId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-        &lt;exclusions&gt;
-            &lt;exclusion&gt;
-                &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
-                &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
-            &lt;/exclusion&gt;
-        &lt;/exclusions&gt;
-    &lt;/dependency&gt;
-    &lt;!--使用pojo解析xml文件所用--&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-        &lt;version&gt;1.16.20&lt;/version&gt;
-    &lt;/dependency&gt;</code></pre>
-下面是我的类结构图：<br><img src="http://img.yangjiapo.cn/jp1.png" alt="avator"><h4 id="配置httpClient"><a href="#配置httpClient" class="headerlink" title="配置httpClient"></a><strong>配置httpClient</strong></h4></li>
-</ul>
-<p>1.httpClient连接可以远程访问服务器，获取数据，有时需要。所以这里也配一下。下面我们进行httpClient配置。在config包下建一个httpClient和httpCLientService，一个是构建对象一个是连接服务。<br>在properties中写入httpclient的基础配置：  </p>
-<pre><code class="angular2html">#http配置服务
-#最大连接数
-http.maxTotal = 100
-#并发数
-http.defaultMaxPerRoute = 20
-#创建连接的最长时间
-http.connectTimeout=1000
-#从连接池中获取到连接的最长时间
-http.connectionRequestTimeout=500
-#数据传输的最长时间
-http.socketTimeout=10000
-#提交请求前测试连接是否可用
-http.staleConnectionCheckEnabled=true</code></pre>
-<p>2.在httpClient往容器中注入Bean属性，采用注解@Value来实现如下：    </p>
-<pre><code class="angular2html">@Configuration
-public class HttpClient {
-
-    @Value(&quot;${http.maxTotal:1}&quot;)
-    private Integer maxTotal;
-
-    @Value(&quot;${http.defaultMaxPerRoute:1}&quot;)
-    private Integer defaultMaxPerRoute;
-
-    @Value(&quot;${http.connectTimeout:1}&quot;)
-    private Integer connectTimeout;
-
-    @Value(&quot;${http.connectionRequestTimeout:1}&quot;)
-    private Integer connectionRequestTimeout;
-
-    @Value(&quot;${http.socketTimeout:1}&quot;)
-    private Integer socketTimeout;
-
-    @Value(&quot;${http.staleConnectionCheckEnabled:true}&quot;)
-    private boolean staleConnectionCheckEnabled;
-}</code></pre>
+            <h1 id="一、tienchin健身系统技术点复现–注解重复提交"><a href="#一、tienchin健身系统技术点复现–注解重复提交" class="headerlink" title="一、tienchin健身系统技术点复现–注解重复提交"></a>一、tienchin健身系统技术点复现–注解重复提交</h1><p>对于开发系统中，我们很多时候，会有很多方法</p>
 <ul>
-<li><p>1.下面我们首先实列化一个连接池管理器，设置最大连接数，并发连接数。</p>
-<pre><code class="angular2html"> @Bean(name = &quot;httpClientConnectionManager&quot;)
-public PoolingHttpClientConnectionManager getHttpClientConnectionManager(){
-    PoolingHttpClientConnectionManager httpClientConnectionManager = new PoolingHttpClientConnectionManager();
-    //最大连接数
-    httpClientConnectionManager.setMaxTotal(maxTotal);
-    //并发数
-    httpClientConnectionManager.setDefaultMaxPerRoute(defaultMaxPerRoute);
-    return httpClientConnectionManager;
-}</code></pre>
+<li><p>Token机制</p>
+<ul>
+<li>首先客户端请求服务端，获取一个 token，每一次请求都获取到一个全新的token，将token存入到redis中，然后将token返回给客户端。</li>
+<li>客户端将来携带刚刚返回的token去请求一个接口。</li>
+<li>服务端收到请求后，分为两种情况：<ul>
+<li>如果 token 在 redis 中，直接删除该 token，然后继续处理业务请求。</li>
+<li>如果 token 不在 redis 中，说明 token 过期或者当前业务已经执行过了，那么此时就不执行业务逻辑。</li>
+</ul>
 </li>
-<li><p>2.实列化连接池，设置连接池管理器。我们需要用到spring的@Qualifier，其意为合格者，用于区分注解实例，参数名为我们的连接池管理器注解名称。      </p>
-<pre><code class="angular2html">@Bean(name = &quot;httpClientBuilder&quot;)
-  public HttpClientBuilder getHttpClientBuilder(@Qualifier(&quot;httpClientConnectionManager&quot;)PoolingHttpClientConnectionManager httpClientConnectionManager){
-
-      //HttpClientBuilder中的构造方法被protected修饰，所以这里不能直接使用new来实例化一个HttpClientBuilder，可以使用HttpClientBuilder提供的静态方法create()来获取HttpClientBuilder对象
-      HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-
-      httpClientBuilder.setConnectionManager(httpClientConnectionManager);
-
-      return httpClientBuilder;
-  }</code></pre>
-<p><img src="http://img.yangjiapo.cn/jp2.png" alt="avator"></p>
+<li>优势：实现简单</li>
+<li>劣势：多一个获取 token 的过程。</li>
+</ul>
+<a id="more"></a>
 </li>
-<li><p>3.注入连接池，获取client对象</p>
-<pre><code class="angular2html">@Bean
-public CloseableHttpClient getCloseableHttpClient(@Qualifier(&quot;httpClientBuilder&quot;) HttpClientBuilder httpClientBuilder){
-    return httpClientBuilder.build();
-}</code></pre>
-</li>
-<li><p>4.Builder是requestConfig中的一个内部类，通过requestConfig的custom方法获取builder的对象，设置builder的连接信息。   </p>
-<pre><code class="angular2html">@Bean(name = &quot;builder&quot;)
-public RequestConfig.Builder getBuilder(){
-    RequestConfig.Builder builder = RequestConfig.custom();
-    return builder.setConnectTimeout(connectTimeout)//创建连接的最长时间
-            .setConnectionRequestTimeout(connectionRequestTimeout)//从连接池中获取的连接最长时间
-            .setSocketTimeout(socketTimeout)//数据传输的最长时间
-            .setStaleConnectionCheckEnabled(staleConnectionCheckEnabled);//提交请求前测试连接是否可用
-}</code></pre>
-</li>
-<li><p>5.用builder构建一个requestConfig对象</p>
-<pre><code class="angular2html">@Bean
-  public RequestConfig getRequestConfig(@Qualifier(&quot;builder&quot;) RequestConfig.Builder builder){
-      return builder.build();
-  }</code></pre>
-<p>到此httpclient基础信息初始化配置完成。</p>
+<li><p>用 Redis 的 setnx </p>
+<ul>
+<li>客户端请求服务端，服务端将能代表请求唯一性的业务字段，通过 setnx 的方式存入 redis，并设置超时时间。</li>
+<li>判断 setnx 是否成功：<ul>
+<li>成功：继续处理业务</li>
+<li>失败：表示业务已经执行过了</li>
+</ul>
 </li>
 </ul>
+</li>
+<li><p>设置状态字段</p>
+<ul>
+<li>要处理的数据，有一个状态字段</li>
+</ul>
+</li>
+<li><p>锁机制</p>
+<ul>
+<li><p>乐观锁：数据库中增加版本号字段，每次更新都根据版本号来判断。更新之前先去查询要更新记录的版本号，第二步更新的时候，将版本号也作为查询条件</p>
+<ul>
+<li>select versionCode from xxx where id = xxx;</li>
+<li>update xxx set xxx = xxx where xxx = xxx and versionCode = xxx;</li>
+</ul>
+</li>
+<li><p>悲观锁</p>
+<ul>
+<li><p>假设每一次拿数据都会被修改，所以直接上排他锁就行了</p>
+</li>
+<li><pre><code class="sql"><span class="keyword">start</span>;
+<span class="keyword">select</span> * <span class="keyword">from</span> xxx <span class="keyword">where</span> xxx <span class="keyword">for</span> <span class="keyword">update</span>
+<span class="keyword">update</span> xxx
+<span class="keyword">commit</span>;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[Gitee代码路径](https:&#x2F;&#x2F;gitee.com&#x2F;Choleen95&#x2F;tien-chin-demo.git)</span><br><span class="line"></span><br><span class="line">## 1、装饰者模式-HttpServletRequest获取Json字节流</span><br><span class="line"></span><br><span class="line">首先继承 &#96;HttpServletRequestWrapper&#96; 重写构造方法、getInputStream()、getReader()</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">public class RepeatableReadRequestWrapper extends HttpServletRequestWrapper &#123;</span><br><span class="line"></span><br><span class="line">    private final byte[] body;</span><br><span class="line"></span><br><span class="line">    public RepeatableReadRequestWrapper(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">            throws IOException &#123;</span><br><span class="line">        super(request);</span><br><span class="line">        request.setCharacterEncoding(&quot;UTF-8&quot;);</span><br><span class="line">        response.setCharacterEncoding(&quot;UTF-8&quot;);</span><br><span class="line">        body &#x3D; request.getReader().readLine().getBytes();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public BufferedReader getReader() throws IOException &#123;</span><br><span class="line">        return new BufferedReader(new InputStreamReader(getInputStream()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public ServletInputStream getInputStream() throws IOException &#123;</span><br><span class="line">        ByteArrayInputStream inputStream &#x3D; new ByteArrayInputStream(body);</span><br><span class="line">        return new ServletInputStream() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean isFinished() &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public boolean isReady() &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void setReadListener(ReadListener readListener) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public int read() throws IOException &#123;</span><br><span class="line">                return inputStream.read();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public int available() throws IOException &#123;</span><br><span class="line">                return body.length;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>然后创建一个过滤器，若是 <code>application/json</code> 格式的则进入装饰者，否则用原来的。</p>
+<h2 id="2、创建过滤器"><a href="#2、创建过滤器" class="headerlink" title="2、创建过滤器"></a>2、创建过滤器</h2><p>由于过滤器 &gt; servlet，所以在这里我们设置一下，在后面的拦截器中获取字节流就没有问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RepeatSubmitFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse,</span></span></span><br><span class="line"><span class="function"><span class="params">            FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        <span class="comment">// 若是json进入装饰者的request</span></span><br><span class="line">        <span class="keyword">if</span> (StringUtils.startsWithIgnoreCase(request.getContentType(), <span class="string">"application/json"</span>)) &#123;</span><br><span class="line">            RepeatableReadRequestWrapper wrapper = <span class="keyword">new</span> RepeatableReadRequestWrapper(</span><br><span class="line">                    request, ((HttpServletResponse) servletResponse));</span><br><span class="line">            filterChain.doFilter(wrapper, servletResponse);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>对于下面的 重服提交拦截器，我们使用抽象类的方式，可以重写判断方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">RepeatSubmitInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">            Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 获取前端传得入参、拦截有 RepeatSubmit 注解得方法，判断是否重复提交</span></span><br><span class="line">        <span class="keyword">if</span> (handler <span class="keyword">instanceof</span> HandlerMethod) &#123;</span><br><span class="line">            <span class="comment">// HandlerMethod 就是我们写的请求接口</span></span><br><span class="line">            HandlerMethod handlerMethod = (HandlerMethod) handler;</span><br><span class="line">            Method method = handlerMethod.getMethod();</span><br><span class="line">            RepeatSubmit annotation = method.getAnnotation(RepeatSubmit<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (annotation != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 对这个加注解得方法进行判断</span></span><br><span class="line">                <span class="keyword">if</span> (validateRepeatableSubmit(request, annotation)) &#123;</span><br><span class="line">                    <span class="comment">// 若是重复提交</span></span><br><span class="line">                    Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                    map.put(<span class="string">"status"</span>, <span class="number">500</span>);</span><br><span class="line">                    map.put(<span class="string">"message"</span>, annotation.message());</span><br><span class="line">                    response.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">                    response.getWriter().write(<span class="keyword">new</span> ObjectMapper().writeValueAsString(map));</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 抽象方法，后面继承此类，可以重写生成 key 的方式</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request 请求</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> repeatSubmit 注解</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2023/6/8</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> boolean&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">validateRepeatableSubmit</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">            RepeatSubmit repeatSubmit)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>HandlerMethod</code> 就是我们定义的 请求接口类 <code>controller</code></p>
+<p>这个类可以获得 注解，然后判断是否为空，然后去作重复提交判断。</p>
+<h2 id="3、定义判断重复提交方法"><a href="#3、定义判断重复提交方法" class="headerlink" title="3、定义判断重复提交方法"></a>3、定义判断重复提交方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能描述 基础可重复提交拦截器，是可以指定是存入 redis 中得 key 组成，比如 加入 url、header 等等</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [山沉]</span></span><br><span class="line"><span class="comment"> * @个人博客 [https://choleen95.github.io/]</span></span><br><span class="line"><span class="comment"> * @博客 [https://www.cnblogs.com/Choleen/]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> [2023/6/7 7:45]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RepeatableSubmitUrlInterceptorImpl</span> <span class="keyword">extends</span> <span class="title">RepeatSubmitInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String REPEAT_PARAMS = <span class="string">"repeat_params"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String REPEAT_TIME = <span class="string">"repeat_time"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String REPEAT_SUBMIT_KEY = <span class="string">"repeat_submit_key"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HEADER = <span class="string">"Authorization"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RedisCache redisCache;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validateRepeatableSubmit</span><span class="params">(HttpServletRequest request, RepeatSubmit repeatSubmit)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取入参</span></span><br><span class="line">        String newParams = <span class="string">""</span>;</span><br><span class="line">        <span class="comment">// request 是 RepeatableReadRequestWrapper</span></span><br><span class="line">        <span class="keyword">if</span> (request <span class="keyword">instanceof</span> RepeatableReadRequestWrapper) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                newParams = request.getReader().readLine();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(newParams)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                newParams = <span class="keyword">new</span> ObjectMapper().writeValueAsString(request.getParameterMap());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (JsonProcessingException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 构建新的newMap存入redis 且和redis中得redisMap比较</span></span><br><span class="line">        Map&lt;String, Object&gt; newMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        newMap.put(REPEAT_PARAMS, newParams);</span><br><span class="line">        newMap.put(REPEAT_TIME, System.currentTimeMillis());</span><br><span class="line">        <span class="comment">// 获取 repeat_sumbit_key</span></span><br><span class="line">        String header = request.getHeader(HEADER);</span><br><span class="line">        StringBuffer requestURL = request.getRequestURL();</span><br><span class="line">        String cacheKey = REPEAT_SUBMIT_KEY + requestURL + header.replace(<span class="string">"Beare"</span>, <span class="string">""</span>);</span><br><span class="line">        Object cacheValue = redisCache.getCacheValue(cacheKey);</span><br><span class="line">        <span class="keyword">if</span> (cacheValue != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 转换成 Map</span></span><br><span class="line">            Map&lt;String, Object&gt; oldMap = (Map&lt;String, Object&gt;) cacheValue;</span><br><span class="line">            <span class="keyword">if</span> (compareParams(newMap, oldMap) &amp;&amp; compareTime(newMap, oldMap,</span><br><span class="line">                    repeatSubmit.interval())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 这里对没有存入redis 的请求，设置值</span></span><br><span class="line">        redisCache.setCacheValue(cacheKey, newMap, repeatSubmit.interval(), TimeUnit.MILLISECONDS);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">compareTime</span><span class="params">(Map&lt;String, Object&gt; newMap, Map&lt;String, Object&gt; oldMap,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">int</span> interval)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> newTime = (Long) newMap.get(REPEAT_TIME);</span><br><span class="line">        <span class="keyword">long</span> oldTime = (Long) oldMap.get(REPEAT_TIME);</span><br><span class="line">        <span class="comment">// 若时间间隔小于注解时间间隔 则属于重复提交</span></span><br><span class="line">        <span class="keyword">return</span> (newTime - oldTime) &lt; interval;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">compareParams</span><span class="params">(Map&lt;String, Object&gt; newMap, Map&lt;String, Object&gt; oldMap)</span> </span>&#123;</span><br><span class="line">        String newParams = (String) newMap.get(REPEAT_PARAMS);</span><br><span class="line">        String oldParams = (String) oldMap.get(REPEAT_PARAMS);</span><br><span class="line">        <span class="keyword">return</span> newParams.equals(oldParams);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里判断 <code>request</code> 是否是自定义的 <code>HttpServeltRequestWrapper</code> 若是，可以获取 <code>BufferReader</code>，然后获取字符串。否则可以获取 key-value 形式的入参。</p>
+<p>对于 <code>String header request.getHeader(HEADER)</code> 此行代码非常关键，因为是请求头中带着用户信息，这样每个请求进来都可以生成不一样的 key 存入redis，作有效的重复提交判断。</p>
+<h2 id="4、注入过滤器的Bean"><a href="#4、注入过滤器的Bean" class="headerlink" title="4、注入过滤器的Bean"></a>4、注入过滤器的Bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RepeatSubmitInterceptor submitInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(submitInterceptor).addPathPatterns(<span class="string">"/**"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">FilterRegistrationBean&lt;RepeatSubmitFilter&gt; <span class="title">filterFilterRegistrationBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        FilterRegistrationBean&lt;RepeatSubmitFilter&gt; bean = <span class="keyword">new</span> FilterRegistrationBean&lt;&gt;();</span><br><span class="line">        bean.setFilter(<span class="keyword">new</span> RepeatSubmitFilter());</span><br><span class="line">        bean.addUrlPatterns(<span class="string">"/*"</span>);</span><br><span class="line">        <span class="keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若是 <code>FilterRegistrationBean</code> 不生成Bean，注入自定义的filer，不能生效，在实现 <code>WebMvcConfigurer</code> 接口，实现 <code>addInterCeptors</code> 注入拦截器，且拦截请求规则。</p>
+<h2 id="5、重复提交注解"><a href="#5、重复提交注解" class="headerlink" title="5、重复提交注解"></a>5、重复提交注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RepeatSubmit &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 两个时间得间隔，毫秒</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">interval</span><span class="params">()</span> <span class="keyword">default</span> 5000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 重复提交时得文本</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "单位时间内，不可重复提交"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>RepeatSubmitInterceptor</code> 中对于是否属于重复提交，就是 redis 中存储的系统时间，和当前时间作对比，若小于 RepeatSubmit 注解中的 interval 时间间隔，获取入参相同，就是重复提交。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a>
+                </div>
+            </div>
         </div>
         
         
@@ -331,17 +269,10 @@ public RequestConfig.Builder getBuilder(){
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/26/fabea79c.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">springboot的java打印票据-2</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/17/5226e067.html">
-                <span class="level-item">Python导出SqlServer数据字典</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2023/06/06/62ecbe6c.html">
+                <span class="level-item">二、tienchin健身系统技术点复现-注解限流</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -357,8 +288,8 @@ public RequestConfig.Builder getBuilder(){
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://choleen95.github.io/2020/03/25/f4f56a79.html';
-        this.page.identifier = '2020/03/25/f4f56a79.html';
+        this.page.url = 'http://choleen95.github.io/2023/06/07/4f2280c6.html';
+        this.page.identifier = '2023/06/07/4f2280c6.html';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -1157,7 +1088,7 @@ public RequestConfig.Builder getBuilder(){
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/gen.svg" alt="springboot的java打印票据" height="28">
+                    <img src="/images/gen.svg" alt="一、tienchin健身系统技术点复现--注解重复提交" height="28">
                 
                 </a>
                 <p class="is-size-7">
