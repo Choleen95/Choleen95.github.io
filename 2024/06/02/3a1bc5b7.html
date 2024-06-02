@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>SpringBoot的java打印票据-3 - 山沉</title>
+
+
+    <meta name="description" content="配置打印xml文件并解析打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot的java打印票据-3">
+<meta property="og:url" content="http://choleen95.github.io/2024/06/02/3a1bc5b7.html">
+<meta property="og:site_name" content="山沉">
+<meta property="og:description" content="配置打印xml文件并解析打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
+<meta property="article:published_time" content="2024-06-02T09:47:52.461Z">
+<meta property="article:modified_time" content="2024-06-02T09:47:52.462Z">
+<meta property="article:author" content="山沉">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://choleen95.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="SpringBoot的java打印票据-3" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2024-06-02T09:47:52.461Z">2024-06-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 853 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SpringBoot的java打印票据-3
+            
+        </h1>
+        <div class="content">
+            <h3 id="配置打印xml文件并解析"><a href="#配置打印xml文件并解析" class="headerlink" title="配置打印xml文件并解析"></a><strong><em>配置打印xml文件并解析</em></strong></h3><p>打印东西，先设置纸张大小，各种参数。若把数字直接填写到打印过程，之后的更改比较麻烦，这里配置一个xml文件，所有的参数都从这里取出打印。        </p>
+<a id="more"></a> 
+<p>1.构建printSettings.xml文件，放置于resources中。</p>
+<pre><code class="javascript">&lt;print&gt;
+    &lt;!-- 打印机设置 --&gt;
+    &lt;choosePrint&gt;<span class="number">3</span>&lt;<span class="regexp">/choosePrint&gt;</span>
+<span class="regexp">    &lt;!-- 打印任务名称 --&gt;</span>
+<span class="regexp">    &lt;printName&gt;PDF&lt;/</span>printName&gt;
+    &lt;!-- 打印机选择,为空时选择默认打印机 --&gt;
+    &lt;defPrintName&gt;&lt;<span class="regexp">/defPrintName&gt;</span>
+<span class="regexp">    &lt;!-- true:配置生效,false:配置不生效 --&gt;</span>
+<span class="regexp">    &lt;isPrint&gt;true&lt;/i</span>sPrint&gt;
+    &lt;!-- 二维码尺寸<span class="number">90</span>*<span class="number">90</span> --&gt;
+    &lt;qrcodeSize&gt;<span class="number">70</span>&lt;<span class="regexp">/qrcodeSize&gt;</span>
+<span class="regexp">    &lt;!--存放二维码的基本地址--&gt;</span>
+<span class="regexp">    &lt;basePath&gt;G:\JavaPrintQRCode\&lt;/</span>basePath&gt;
+    &lt;!-- 纸张设置 --&gt;
+    &lt;paper&gt;
+        &lt;!-- 打印纸张设置paperWidth,paperHeight --&gt;
+        &lt;paperWidth&gt;<span class="number">595</span>&lt;<span class="regexp">/paperWidth&gt;</span>
+<span class="regexp">        &lt;paperHeight&gt;842&lt;/</span>paperHeight&gt;
+        &lt;!-- 打印区域设置x,y,width,height --&gt;
+        &lt;x&gt;<span class="number">10</span>&lt;<span class="regexp">/x&gt;</span>
+<span class="regexp">        &lt;y&gt;15&lt;/y</span>&gt;
+        &lt;width&gt;<span class="number">580</span>&lt;<span class="regexp">/width&gt;</span>
+<span class="regexp">        &lt;height&gt;840&lt;/</span>height&gt;
+    &lt;<span class="regexp">/paper&gt;</span>
+<span class="regexp">    &lt;!--条形码参数--&gt;</span>
+<span class="regexp">    &lt;tmParameters&gt;</span>
+<span class="regexp">        &lt;paperWidth&gt;200&lt;/</span>paperWidth&gt;
+        &lt;paperHeight&gt;<span class="number">150</span>&lt;<span class="regexp">/paperHeight&gt;</span>
+<span class="regexp">        &lt;useWidth&gt;180&lt;/u</span>seWidth&gt;
+        &lt;useHeight&gt;<span class="number">100</span>&lt;<span class="regexp">/useHeight&gt;</span>
+<span class="regexp">        &lt;useX&gt;5&lt;/u</span>seX&gt;
+        &lt;useY&gt;<span class="number">10</span>&lt;<span class="regexp">/useY&gt;</span>
+<span class="regexp">        &lt;x&gt;20&lt;/</span>x&gt;
+        &lt;y&gt;<span class="number">40</span>&lt;<span class="regexp">/y&gt;</span>
+<span class="regexp">        &lt;width&gt;170&lt;/</span>width&gt;
+        &lt;height&gt;<span class="number">50</span>&lt;<span class="regexp">/height&gt;</span>
+<span class="regexp">        &lt;path&gt;D:\JavaPrintTmCode\&lt;/</span>path&gt;
+        &lt;titleFontName&gt;宋体&lt;<span class="regexp">/titleFontName&gt;</span>
+<span class="regexp">        &lt;titleSize&gt;10&lt;/</span>titleSize&gt;
+        &lt;addressSize&gt;<span class="number">20</span>&lt;<span class="regexp">/addressSize&gt;</span>
+<span class="regexp">        &lt;numberSize&gt;10&lt;/</span>numberSize&gt;
+        &lt;companyName&gt;玖陆物流&lt;<span class="regexp">/companyName&gt;</span>
+<span class="regexp">        &lt;tmPrintName&gt;Xprinter XP-365B&lt;/</span>tmPrintName&gt;
+        &lt;!--<span class="xml"><span class="tag">&lt;<span class="name">tmPrintName</span>&gt;</span>360<span class="tag">&lt;/<span class="name">tmPrintName</span>&gt;</span></span>--&gt;
+    &lt;<span class="regexp">/tmParameters&gt;</span>
+<span class="regexp">    &lt;!-- 打印数据参数设置 --&gt;</span>
+<span class="regexp">    &lt;dataset&gt;</span>
+<span class="regexp">        &lt;data x="5" y="30" name="startAddress" cellWidth="" cellHeight="" font="宋体" size="16"/</span>&gt;
+        &lt;datas name=<span class="string">"appGoodsOrder"</span> type=<span class="string">""</span>&gt;
+            &lt;data x=<span class="string">"110"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsName"</span> /&gt;
+            &lt;data x=<span class="string">"205"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsPkgs"</span> /&gt;
+            &lt;data x=<span class="string">"295"</span> y=<span class="string">"110"</span> name=<span class="string">"goodsPackage"</span> /&gt;
+        &lt;<span class="regexp">/datas&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">        &lt;!--费用格式--&gt;</span>
+<span class="regexp">        &lt;datas name="appFeeOrder" type=""&gt;</span>
+<span class="regexp">            &lt;data x="70" y="230" name="feeText" /</span>&gt;
+        &lt;<span class="regexp">/datas&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">        &lt;table x="" y="" width="" height=""&gt;</span>
+<span class="regexp">            &lt;tr width="" height=""&gt;</span>
+<span class="regexp">                &lt;td width="" height="" colspan="" rowspan="" &gt;&lt;/</span>td&gt;
+                &lt;td width=<span class="string">""</span> height=<span class="string">""</span>&gt;&lt;<span class="regexp">/td&gt;</span>
+<span class="regexp">            &lt;/</span>tr&gt;
+        &lt;<span class="regexp">/table&gt;</span>
+<span class="regexp"></span>
+<span class="regexp">    &lt;/</span>dataset&gt;
+&lt;<span class="regexp">/print&gt;</span></code></pre>
+<p>设置好之后，到pom文件中按下alt + insert 引入maven依赖       </p>
+<pre><code class="javascript">&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;<span class="regexp">/groupId&gt;</span>
+<span class="regexp">    &lt;artifactId&gt;lombok&lt;/</span>artifactId&gt;
+    &lt;version&gt;<span class="number">1.16</span><span class="number">.20</span>&lt;<span class="regexp">/version&gt;</span>
+<span class="regexp">&lt;/</span>dependency&gt;</code></pre>
+<p>让节点构成实体。这样方便我们在打印过程中取值。下面是我的实体结构，从最上层逐步往下。<br><img src="http://img.yangjiapo.cn/JavaPrint3.1.png" alt="avator"><br>其中PrintSettings类是最上层。在加入注解时，可能会有重复的名称，我们需要加入 @XmlTransient注解，这样只在@XmlRootElement注解的实体中找寻有无重复，不管其他类的变量。展示一下最上层和其次顺序的类。       </p>
+<pre><code class="javascript">package com.cargo.order.settings;
+
+<span class="keyword">import</span> lombok.AllArgsConstructor;
+<span class="keyword">import</span> lombok.Data;
+<span class="keyword">import</span> lombok.NoArgsConstructor;
+
+<span class="keyword">import</span> javax.xml.bind.annotation.*;
+
+<span class="comment">/**</span>
+<span class="comment"> *打印设置POJO</span>
+<span class="comment"> * <span class="doctag">@since </span>2020/3/25 8:46</span>
+<span class="comment"> **/</span>
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@XmlRootElement(name = <span class="string">"print"</span>)
+@XmlAccessorType(XmlAccessType.FIELD)
+public <span class="class"><span class="keyword">class</span> <span class="title">PrintSettings</span> </span>{
+    @XmlElement(name = <span class="string">"choosePrint"</span>)
+    private <span class="built_in">String</span> choosePrint;
+    @XmlElement(name = <span class="string">"printName"</span>)
+    private <span class="built_in">String</span> printName;
+    @XmlElement(name = <span class="string">"isPrint"</span>)
+    private <span class="built_in">Boolean</span> isPrint;
+    @XmlElement(name = <span class="string">"qrcodeSize"</span>)
+    private Integer qrcodeSize;
+    @XmlElement(name = <span class="string">"basePath"</span>)
+    private <span class="built_in">String</span> basePath;
+    @XmlElement(name = <span class="string">"paper"</span>)
+    private Paper paper;
+    @XmlElement(name = <span class="string">"dataset"</span>)
+    private DataSet dataSet;
+    @XmlElement(name = <span class="string">"tmParameters"</span>)
+    private TmParameters tmParameters;
+
+    public TmParameters getTmParameters() {
+        <span class="keyword">return</span> tmParameters;
+    }
+
+    public <span class="keyword">void</span> setTmParameters(TmParameters tmParameters) {
+        <span class="keyword">this</span>.tmParameters = tmParameters;
+    }
+
+    public <span class="built_in">String</span> getChoosePrint() {
+        <span class="keyword">return</span> choosePrint;
+    }
+
+    public <span class="keyword">void</span> setChoosePrint(<span class="built_in">String</span> choosePrint) {
+        <span class="keyword">this</span>.choosePrint = choosePrint;
+    }
+
+    public <span class="built_in">String</span> getPrintName() {
+        <span class="keyword">return</span> printName;
+    }
+
+    public <span class="keyword">void</span> setPrintName(<span class="built_in">String</span> printName) {
+        <span class="keyword">this</span>.printName = printName;
+    }
+
+    public <span class="built_in">Boolean</span> getPrint() {
+        <span class="keyword">return</span> isPrint;
+    }
+
+    public <span class="keyword">void</span> setPrint(<span class="built_in">Boolean</span> print) {
+        isPrint = print;
+    }
+
+    public Integer getQrcodeSize() {
+        <span class="keyword">return</span> qrcodeSize;
+    }
+
+    public <span class="keyword">void</span> setQrcodeSize(Integer qrcodeSize) {
+        <span class="keyword">this</span>.qrcodeSize = qrcodeSize;
+    }
+
+    public Paper getPaper() {
+        <span class="keyword">return</span> paper;
+    }
+
+    public <span class="keyword">void</span> setPaper(Paper paper) {
+        <span class="keyword">this</span>.paper = paper;
+    }
+
+    public DataSet getDataSet() {
+        <span class="keyword">return</span> dataSet;
+    }
+
+    public <span class="keyword">void</span> setDataSet(DataSet dataSet) {
+        <span class="keyword">this</span>.dataSet = dataSet;
+    }
+
+    public <span class="built_in">String</span> getBasePath() {
+        <span class="keyword">return</span> basePath;
+    }
+
+    public <span class="keyword">void</span> setBasePath(<span class="built_in">String</span> basePath) {
+        <span class="keyword">this</span>.basePath = basePath;
+    }
+}</code></pre>
+<p>然后展示一下Paper实体.      </p>
+<pre><code class="javascript">package com.cargo.order.settings;
+
+<span class="keyword">import</span> lombok.AllArgsConstructor;
+<span class="keyword">import</span> lombok.Data;
+<span class="keyword">import</span> lombok.NoArgsConstructor;
+
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlAttribute;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlElement;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlRootElement;
+<span class="keyword">import</span> javax.xml.bind.annotation.XmlTransient;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@XmlRootElement(name = <span class="string">"paper"</span>)
+public <span class="class"><span class="keyword">class</span> <span class="title">Paper</span> </span>{
+    @XmlElement(name = <span class="string">"paperWidth"</span>)
+    private Integer paperWidth;
+    @XmlElement(name = <span class="string">"paperHeight"</span>)
+    private Integer paperHeight;
+    @XmlElement(name = <span class="string">"x"</span>)
+    private Integer x;
+    @XmlElement(name = <span class="string">"y"</span>)
+    private Integer y;
+    @XmlElement(name = <span class="string">"width"</span>)
+    private Integer width;
+    @XmlElement(name = <span class="string">"height"</span>)
+    private Integer height;
+    @XmlTransient
+    public Integer getPaperWidth() {
+        <span class="keyword">return</span> paperWidth;
+    }
+
+    public <span class="keyword">void</span> setPaperWidth(Integer paperWidth) {
+        <span class="keyword">this</span>.paperWidth = paperWidth;
+    }
+    @XmlTransient
+    public Integer getPaperHeight() {
+        <span class="keyword">return</span> paperHeight;
+    }
+
+    public <span class="keyword">void</span> setPaperHeight(Integer paperHeight) {
+        <span class="keyword">this</span>.paperHeight = paperHeight;
+    }
+    @XmlTransient
+    public Integer getX() {
+        <span class="keyword">return</span> x;
+    }
+
+    public <span class="keyword">void</span> setX(Integer x) {
+        <span class="keyword">this</span>.x = x;
+    }
+    @XmlTransient
+    public Integer getY() {
+        <span class="keyword">return</span> y;
+    }
+
+    public <span class="keyword">void</span> setY(Integer y) {
+        <span class="keyword">this</span>.y = y;
+    }
+    @XmlTransient
+    public Integer getWidth() {
+        <span class="keyword">return</span> width;
+    }
+
+    public <span class="keyword">void</span> setWidth(Integer width) {
+        <span class="keyword">this</span>.width = width;
+    }
+    @XmlTransient
+    public Integer getHeight() {
+        <span class="keyword">return</span> height;
+    }
+
+    public <span class="keyword">void</span> setHeight(Integer height) {
+        <span class="keyword">this</span>.height = height;
+    }
+}
+</code></pre>
+<p>在要用的地方直接静态代码块，加载一次，使用，比如：   </p>
+<pre><code class="javascript">private <span class="keyword">static</span>  PrintSettings printSettings;
+   <span class="keyword">static</span> {
+       <span class="keyword">try</span> {
+           <span class="comment">//读取Resource目录下的XML文件</span>
+           Resource resource = <span class="keyword">new</span> ClassPathResource(<span class="string">"printSettings.xml"</span>);
+           <span class="comment">//利用输入流获取XML文件内容</span>
+           BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(resource.getInputStream(), <span class="string">"UTF-8"</span>));
+           StringBuffer buffer = <span class="keyword">new</span> StringBuffer();
+           <span class="built_in">String</span> line = <span class="string">""</span>;
+           <span class="keyword">while</span> ((line = br.readLine()) != <span class="literal">null</span>) {
+               buffer.append(line);
+           }
+           br.close();
+           <span class="comment">//XML转为JAVA对象</span>
+           PrintSettings settings = (PrintSettings) XmlBuilder.xmlStrToObject(PrintSettings.class, buffer.toString());
+           printSettings = settings;
+       }<span class="keyword">catch</span> (Exception e){
+           logger.error(<span class="string">"异常"</span>,e);
+       }
+   }</code></pre>
+<p>到此xml文件配置好了，也可以使用。<br><a href="https://gitee.com/Choleen95/SpringBoot-JavaPrint">代码已上传到gitee</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2024/06/02/4a17b156.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Hello World</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2024/06/02/2f0e45c7.html">
+                <span class="level-item">Life/吾日三省</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Your name">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Your name
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Your title
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            35
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            10
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/ppoffice">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Elastic/">
+            <span class="level-start">
+                <span class="level-item">Elastic</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JS/">
+            <span class="level-start">
+                <span class="level-item">JS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Life/">
+            <span class="level-start">
+                <span class="level-item">Life</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Novel/">
+            <span class="level-start">
+                <span class="level-item">Novel</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Redis/">
+            <span class="level-start">
+                <span class="level-item">Redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringBoot/">
+            <span class="level-start">
+                <span class="level-item">SpringBoot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/WEB/">
+            <span class="level-start">
+                <span class="level-item">WEB</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E4%BA%BA%E7%94%9F/">
+            <span class="level-start">
+                <span class="level-item">人生</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+            <span class="level-start">
+                <span class="level-item">服务器</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SpringBoot/" style="font-size: 20px;">SpringBoot</a> <a href="/tags/nodeJs/" style="font-size: 10px;">nodeJs</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/4a17b156.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.465Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/4a17b156.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/3a1bc5b7.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringBoot的java打印票据-3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.461Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/3a1bc5b7.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringBoot的java打印票据-3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/2f0e45c7.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/吾日三省">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.449Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/2f0e45c7.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/吾日三省</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/f6d88674.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/Sql1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.448Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/f6d88674.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/Sql1</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/01/3873cf6c.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2024还不会安装NodeJs">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-05-31T16:00:00.000Z">2024-06-01</time></div>
+                    <a href="/2024/06/01/3873cf6c.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2024还不会安装NodeJs</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SpringBoot/">
+                        <span class="tag">SpringBoot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodeJs/">
+                        <span class="tag">nodeJs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/4a17b156.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.465Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/4a17b156.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/3a1bc5b7.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringBoot的java打印票据-3">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.461Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/3a1bc5b7.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringBoot的java打印票据-3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/2f0e45c7.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/吾日三省">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.449Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/2f0e45c7.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/吾日三省</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/02/f6d88674.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Life/Sql1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-06-02T09:47:52.448Z">2024-06-02</time></div>
+                    <a href="/2024/06/02/f6d88674.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Life/Sql1</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2024/06/01/3873cf6c.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2024还不会安装NodeJs">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-05-31T16:00:00.000Z">2024-06-01</time></div>
+                    <a href="/2024/06/01/3873cf6c.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">2024还不会安装NodeJs</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SpringBoot/">
+                        <span class="tag">SpringBoot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodeJs/">
+                        <span class="tag">nodeJs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="SpringBoot的java打印票据-3" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2024 山沉&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a69adde53e2766b0280cc3a04740db48";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://Choleen95.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
