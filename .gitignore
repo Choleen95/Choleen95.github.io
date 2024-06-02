@@ -4,7 +4,11 @@ db.json
 *.log
 node_modules/
 .deploy*/
+# public/ 和 themes文件在hexo 分支上都应该不被提交，因为是我们写的
+# 但是themes中的_conf.yml我们需要copy一份在source目录下备用，以免电脑丢失
+# 合理的管理分支
 public/
+themes
 .yes.pub
 .idea/**
 .vs/**
