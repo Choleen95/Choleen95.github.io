@@ -1,8 +1,9 @@
 ---
-title:  Git学习记录v1.0
+title: Git学习记录v1.0
 categories: Git
-date: 2024-06-16 00:00:00
 tags: Git
+abbrlink: 4680ac6f
+date: 2024-06-16 00:00:00
 ---
 ## 1、常用操作
 
