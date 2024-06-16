@@ -7,19 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>归档: 2020/10 - 山沉</title>
+<title>Git学习记录v1.0 - 山沉</title>
 
 
-    <meta name="description" content="learn to something">
-<meta property="og:type" content="website">
-<meta property="og:title" content="山沉">
-<meta property="og:url" content="http://choleen95.github.io/archives/2020/10/index.html">
+    <meta name="description" content="1、常用操作 git clone  git config git branch gitt checkout git status git add git commit git push git pull git log git tag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习记录v1.0">
+<meta property="og:url" content="http://choleen95.github.io/2024/06/16/4680ac6f.html">
 <meta property="og:site_name" content="山沉">
-<meta property="og:description" content="learn to something">
+<meta property="og:description" content="1、常用操作 git clone  git config git branch gitt checkout git status git add git commit git push git pull git log git tag">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
+<meta property="article:published_time" content="2024-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-16T13:21:21.677Z">
 <meta property="article:author" content="山沉">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://choleen95.github.io/images/og_image.png">
 
@@ -79,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="山沉" height="28">
+                <img src="/images/logo.svg" alt="Git学习记录v1.0" height="28">
             
             </a>
         </div>
@@ -129,53 +131,193 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        十月 2020
-        </h3>
-        <div class="timeline">
+<div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2024-06-15T16:00:00.000Z">2024-06-16</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-10-04T16:00:00.000Z">2020-10-05</time>
-                        <a href="/2020/10/05/5fa600f2.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">微风拂面，杨柳倒垂</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Novel/">Novel</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-10-04T16:00:00.000Z">2020-10-05</time>
-                        <a href="/2020/10/05/b846387f.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Redis的分布式锁</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Redis/">Redis</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 849 个字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Git学习记录v1.0
+            
+        </h1>
+        <div class="content">
+            <h2 id="1、常用操作"><a href="#1、常用操作" class="headerlink" title="1、常用操作"></a>1、常用操作</h2><ul>
+<li>git clone </li>
+<li>git config</li>
+<li>git branch</li>
+<li>gitt checkout</li>
+<li>git status</li>
+<li>git add</li>
+<li>git commit</li>
+<li>git push</li>
+<li>git pull</li>
+<li>git log</li>
+<li>git tag<a id="more"></a>
+<h3 id="1-1-git-clone"><a href="#1-1-git-clone" class="headerlink" title="1.1 git clone"></a>1.1 git clone</h3></li>
+</ul>
+<p>从git服务器拉取代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitee.com/xxx/studyJava.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-git-config"><a href="#1-2-git-config" class="headerlink" title="1.2 git config"></a>1.2 git config</h3><p>配置开发者用户名和邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name xxx</span><br><span class="line">git config user.email xxx@qq.com</span><br></pre></td></tr></table></figure>
+
+<p>每次代码提交的时候都会生成一条记录，其中就会包含自己配置的用户名和邮箱</p>
+<p>若想查看配置的用户名和邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git configt user.email</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-git-branch"><a href="#1-3-git-branch" class="headerlink" title="1.3 git branch"></a>1.3 git branch</h3><p>创建、重名名、查看、删除分支</p>
+<ul>
+<li>新增</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch feature-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-git-checkout"><a href="#1-4-git-checkout" class="headerlink" title="1.4 git checkout"></a>1.4 git checkout</h3><p>切换分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-git-status"><a href="#1-5-git-status" class="headerlink" title="1.5 git status"></a>1.5 git status</h3><p>查看文件变动状态，有哪些需要add，哪些学院commit</p>
+<p>On branch feature-dev<br>Changes not staged for commit:<br>  (use “git add <file>…” to update what will be committed)<br>  (use “git restore <file>…” to discard changes in working directory)<br>        modified:   src/testGit/Demo.java</file></file></p>
+<p>no changes added to commit (use “git add” and/or “git commit -a”)</p>
+<h3 id="1-6-git-add"><a href="#1-6-git-add" class="headerlink" title="1.6 git add"></a>1.6 git add</h3><p>天骄文件变动到暂存区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add src/testGit/Demo.java</span><br></pre></td></tr></table></figure>
+
+<p>添加所有文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add.</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/06/16/4680ac6f/D:%5CBlogFile%5C2024%5C0616%5Cgit-add.png" alt="git-add"></p>
+<h3 id="1-7-git-commit"><a href="#1-7-git-commit" class="headerlink" title="1.7 git commit"></a>1.7 git commit</h3><p>提交文件变动到版本库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">'提交文件到远程版本库'</span></span><br></pre></td></tr></table></figure>
+
+<p><em>-m</em> 参数可直接在命令行里输入提交描述文本</p>
+<h3 id="1-8-git-push"><a href="#1-8-git-push" class="headerlink" title="1.8 git push"></a>1.8 git push</h3><p>将本地的代码改动推送到服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin feature-dev</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/06/16/4680ac6f/D:%5CBlogFile%5C2024%5C0616%5Cgit-push.png" alt="git-push"></p>
+<p>origin 当前的git服务器地址</p>
+<h3 id="1-9-git-pull"><a href="#1-9-git-pull" class="headerlink" title="1.9 git pull"></a>1.9 git pull</h3><p>将服务器上的最新代码拉取到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin feature-dev</span><br></pre></td></tr></table></figure>
+
+<p>项目成员对项目做了改动并推送到服务器，我们需要将最新的改动更新到本地，这里我们来模拟一下这种情况。</p>
+<p>到 gitee上把文件改动一下</p>
+<p><img src="/2024/06/16/4680ac6f/D:%5CBlogFile%5C2024%5C0616%5Cgit-pull.png" alt="git-pull"></p>
+<h3 id="1-10-git-log"><a href="#1-10-git-log" class="headerlink" title="1.10 git log"></a>1.10 git log</h3><p>查看版本提交记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<p>查看整个项目的版本提交记录，大多数情况下，看的都是自己的记录</p>
+<p>按 <strong>J</strong> 键往下翻，按 <strong>K</strong> 键往上翻，按 <strong>Q</strong>键退出查看</p>
+<h4 id="1-10-1-git-commit-m提交后如何回退"><a href="#1-10-1-git-commit-m提交后如何回退" class="headerlink" title="1.10.1 git commit -m提交后如何回退"></a>1.10.1 git commit -m提交后如何回退</h4><p>最近提交代码，和任务单号挂钩，有时需要回退。这个需要学习一下。</p>
+<h5 id="1-10-1-1-使用-soft"><a href="#1-10-1-1-使用-soft" class="headerlink" title="1.10.1.1 使用 soft"></a>1.10.1.1 使用 soft</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD~1</span><br></pre></td></tr></table></figure>
+
+<p>这会撤销上一次的提交，但保留所有更改在你的工作区。意味着自己的更改仍然被 Git 跟踪，可以再次提交它们，或者修改之后提交。</p>
+<h5 id="1-10-1-2-使用-hard"><a href="#1-10-1-2-使用-hard" class="headerlink" title="1.10.1.2 使用 hard"></a>1.10.1.2 使用 hard</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+
+<p>这会撤销上次的提交，并且丢且所有更改。这意味着你的工作区将会回到上一次提交的状态。</p>
+<h5 id="1-10-1-3-使用-具体哈希值"><a href="#1-10-1-3-使用-具体哈希值" class="headerlink" title="1.10.1.3 使用 具体哈希值"></a>1.10.1.3 使用 具体哈希值</h5><p>用 git log 命令 找到想回退的指定提交海西值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard ae1057b65dffc3e6586ce3c9ee308f102c0c79ac^</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong> 这里的 <strong>^</strong> 表示前一个提交</p>
+<p>使用 <strong>–hard</strong> 会丢失你自上一次提交以来的所有未提交的更改。</p>
+<h4 id="1-10-2-覆盖提交信息"><a href="#1-10-2-覆盖提交信息" class="headerlink" title="1.10.2 覆盖提交信息"></a>1.10.2 覆盖提交信息</h4><p>当然我们只想覆盖信息，代码不想回退到工作区间。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m <span class="string">'add bbb'</span></span><br></pre></td></tr></table></figure>
+
+<p>这将打开你的默认文本编辑器(或者你使用了<em>-m</em>,则直接创建新的提交记录并覆盖)，修改并保存。</p>
+<p>不管加不加 -m 提交记录的哈希值都会创建新的。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Git/" rel="tag">Git</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2024/06/02/4a17b156.html">
+                <span class="level-item">Hello World</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -994,7 +1136,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="山沉" height="28">
+                    <img src="/images/logo.svg" alt="Git学习记录v1.0" height="28">
                 
                 </a>
                 <p class="is-size-7">
