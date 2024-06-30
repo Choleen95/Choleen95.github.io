@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://choleen95.github.io/images/og_image.png">
 <meta property="article:published_time" content="2024-06-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-23T14:35:21.128Z">
+<meta property="article:modified_time" content="2024-06-30T03:58:30.528Z">
 <meta property="article:author" content="山沉">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -147,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 844 个字)
+                    6 分钟 读完 (大约 840 个字)
                 </span>
                 
                 
@@ -175,12 +175,12 @@
 
 
 
-<h2 id="3、NoClassDefFoundError-org-springframework-boot-Bootstrapper"><a href="#3、NoClassDefFoundError-org-springframework-boot-Bootstrapper" class="headerlink" title="3、NoClassDefFoundError    org/springframework/boot/Bootstrapper"></a>3、NoClassDefFoundError    org/springframework/boot/Bootstrapper</h2><h3 id="3-1-Spring-Boot-依赖版本与-Spring-Cloud-Alibaba依赖版本不一致"><a href="#3-1-Spring-Boot-依赖版本与-Spring-Cloud-Alibaba依赖版本不一致" class="headerlink" title="3.1 Spring Boot 依赖版本与 Spring Cloud Alibaba依赖版本不一致"></a>3.1 Spring Boot 依赖版本与 Spring Cloud Alibaba依赖版本不一致</h3><p><img src="/2024/06/23/97bca55b/C:%5CUsers%5CCho%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240623132315381.png" alt="image-20240623132315381"></p>
+<h2 id="3、NoClassDefFoundError-org-springframework-boot-Bootstrapper"><a href="#3、NoClassDefFoundError-org-springframework-boot-Bootstrapper" class="headerlink" title="3、NoClassDefFoundError    org/springframework/boot/Bootstrapper"></a>3、NoClassDefFoundError    org/springframework/boot/Bootstrapper</h2><h3 id="3-1-Spring-Boot-依赖版本与-Spring-Cloud-Alibaba依赖版本不一致"><a href="#3-1-Spring-Boot-依赖版本与-Spring-Cloud-Alibaba依赖版本不一致" class="headerlink" title="3.1 Spring Boot 依赖版本与 Spring Cloud Alibaba依赖版本不一致"></a>3.1 Spring Boot 依赖版本与 Spring Cloud Alibaba依赖版本不一致</h3><p><img src="https://gitee.com/Choleen95/blog-file/raw/master/2024/623/image-20240623132315381.png" alt="image-20240623132315381"></p>
 <p>根据版本表，配置springCloud,SpringBoot,CloudAlibaba</p>
-<p><img src="/2024/06/23/97bca55b/C:%5CUsers%5CCho%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240623174556575.png" alt="image-20240623174556575"></p>
+<p><img src="https://gitee.com/Choleen95/blog-file/raw/master/2024/623/image-20240623174556575.png" alt="image-20240623174556575"></p>
 <h3 id="3-2-接着再启动报错："><a href="#3-2-接着再启动报错：" class="headerlink" title="3.2 接着再启动报错："></a>3.2 接着再启动报错：</h3><p><strong>The dependencies of some of the beans in the application context form a cycle:</strong></p>
 <p>|  restTemplateController (field public org.springframework.web.client.RestTemplate com.example.cloud.demos.nacosdiscoveryconsumer.RestTemplateController.restTemplate)</p>
-<p><img src="/2024/06/23/97bca55b/C:%5CUsers%5CCho%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240623175230553.png" alt="image-20240623175230553"></p>
+<p><img src="https://gitee.com/Choleen95/blog-file/raw/master/2024/623/image-20240623175230553.png" alt="image-20240623175230553"></p>
 <p>在这个controller中，循环注入。</p>
 <p>把这个移到其他类中。</p>
 <h3 id="3-3-Caused-by-com-alibaba-nacos-api-exception-NacosException-Client-not-connected-current-status-STARTING"><a href="#3-3-Caused-by-com-alibaba-nacos-api-exception-NacosException-Client-not-connected-current-status-STARTING" class="headerlink" title="3.3 Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING"></a>3.3 Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING</h3><p>链接不上nacos服务器。这里有两个方面：</p>
@@ -191,7 +191,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.nacos<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>nacos-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>现在在服务列表上就能看见注册信息了。</p>
-<p><img src="/2024/06/23/97bca55b/C:%5CUsers%5CCho%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240623182436414.png" alt="image-20240623182436414"></p>
+<p><img src="https://gitee.com/Choleen95/blog-file/raw/master/2024/623/image-20240623182436414.png" alt="image-20240623182436414"></p>
 <h2 id="4、Spring-MVC-found-on-classpath-which-is-incompatible-with-Spring-Cloud-Gateway"><a href="#4、Spring-MVC-found-on-classpath-which-is-incompatible-with-Spring-Cloud-Gateway" class="headerlink" title="4、Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway."></a>4、Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.</h2><p>Spring Cloud Gateway的项目中不能用 SpringMVC的依赖</p>
 <p>在依赖中排除</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-start-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br></pre></td></tr></table></figure>
